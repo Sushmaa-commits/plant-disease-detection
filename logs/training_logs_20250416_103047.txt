@@ -1,0 +1,95 @@
+2025-04-16 10:30:47,238 - INFO - Initializing CUDA...
+2025-04-16 10:30:47,316 - INFO - CUDA initialized in 0.08s
+2025-04-16 10:30:47,316 - INFO - Using GPU: NVIDIA GeForce GTX 1050 Ti
+2025-04-16 10:30:47,316 - INFO - Setting up data transformations...
+2025-04-16 10:30:47,316 - INFO - Loading dataset from ./train...
+2025-04-16 10:30:47,488 - INFO - Dataset loaded successfully with 43444 images
+2025-04-16 10:30:47,488 - INFO - Splitting dataset...
+2025-04-16 10:30:47,488 - INFO - Creating data loaders...
+2025-04-16 10:30:47,504 - INFO - 
+Found 38 classes:
+['Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy', 'Blueberry___healthy', 'Cherry_(including_sour)___Powdery_mildew', 'Cherry_(including_sour)___healthy', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot', 'Corn_(maize)___Common_rust_', 'Corn_(maize)___Northern_Leaf_Blight', 'Corn_(maize)___healthy', 'Grape___Black_rot', 'Grape___Esca_(Black_Measles)', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 'Grape___healthy', 'Orange___Haunglongbing_(Citrus_greening)', 'Peach___Bacterial_spot', 'Peach___healthy', 'Pepper,_bell___Bacterial_spot', 'Pepper,_bell___healthy', 'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy', 'Raspberry___healthy', 'Soybean___healthy', 'Squash___Powdery_mildew', 'Strawberry___Leaf_scorch', 'Strawberry___healthy', 'Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy']
+
+2025-04-16 10:30:47,504 - INFO - Initializing model...
+2025-04-16 10:30:47,879 - INFO - Model architecture:
+PlantDiseaseCNN(
+  (features): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Dropout(p=0.2, inplace=False)
+    (5): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (6): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (7): ReLU()
+    (8): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (9): Dropout(p=0.3, inplace=False)
+    (10): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (11): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (12): ReLU()
+    (13): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (14): Dropout(p=0.4, inplace=False)
+  )
+  (classifier): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=100352, out_features=512, bias=True)
+    (2): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (3): ReLU()
+    (4): Dropout(p=0.5, inplace=False)
+    (5): Linear(in_features=512, out_features=38, bias=True)
+  )
+)
+2025-04-16 10:30:47,879 - INFO - Calculating class weights with optimized balancing...
+2025-04-16 10:30:48,066 - INFO - 
+📊 Class Distribution and Optimized Weights:
+2025-04-16 10:30:48,066 - INFO - Apple___Apple_scab                                 | Count:   398 | Weight: 1.74
+2025-04-16 10:30:48,066 - INFO - Apple___Black_rot                                  | Count:   399 | Weight: 1.73
+2025-04-16 10:30:48,066 - INFO - Apple___Cedar_apple_rust                           | Count:   172 | Weight: 4.02
+2025-04-16 10:30:48,066 - INFO - Apple___healthy                                    | Count:  1055 | Weight: 0.66
+2025-04-16 10:30:48,066 - INFO - Blueberry___healthy                                | Count:   953 | Weight: 0.73
+2025-04-16 10:30:48,066 - INFO - Cherry_(including_sour)___Powdery_mildew           | Count:   692 | Weight: 1.00
+2025-04-16 10:30:48,066 - INFO - Cherry_(including_sour)___healthy                  | Count:   544 | Weight: 1.27
+2025-04-16 10:30:48,066 - INFO - Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot | Count:   330 | Weight: 2.10
+2025-04-16 10:30:48,066 - INFO - Corn_(maize)___Common_rust_                        | Count:   768 | Weight: 0.90
+2025-04-16 10:30:48,066 - INFO - Corn_(maize)___Northern_Leaf_Blight                | Count:   627 | Weight: 1.10
+2025-04-16 10:30:48,066 - INFO - Corn_(maize)___healthy                             | Count:   721 | Weight: 0.96
+2025-04-16 10:30:48,066 - INFO - Grape___Black_rot                                  | Count:   732 | Weight: 0.95
+2025-04-16 10:30:48,066 - INFO - Grape___Esca_(Black_Measles)                       | Count:   890 | Weight: 0.78
+2025-04-16 10:30:48,066 - INFO - Grape___Leaf_blight_(Isariopsis_Leaf_Spot)         | Count:   673 | Weight: 1.03
+2025-04-16 10:30:48,066 - INFO - Grape___healthy                                    | Count:   270 | Weight: 2.56
+2025-04-16 10:30:48,066 - INFO - Orange___Haunglongbing_(Citrus_greening)           | Count:  3528 | Weight: 0.20
+2025-04-16 10:30:48,066 - INFO - Peach___Bacterial_spot                             | Count:  1488 | Weight: 0.47
+2025-04-16 10:30:48,066 - INFO - Peach___healthy                                    | Count:   235 | Weight: 2.94
+2025-04-16 10:30:48,066 - INFO - Pepper,_bell___Bacterial_spot                      | Count:   639 | Weight: 1.08
+2025-04-16 10:30:48,066 - INFO - Pepper,_bell___healthy                             | Count:   927 | Weight: 0.75
+2025-04-16 10:30:48,066 - INFO - Potato___Early_blight                              | Count:   632 | Weight: 1.09
+2025-04-16 10:30:48,082 - INFO - Potato___Late_blight                               | Count:   645 | Weight: 1.07
+2025-04-16 10:30:48,082 - INFO - Potato___healthy                                   | Count:    97 | Weight: 10.00
+2025-04-16 10:30:48,082 - INFO - Raspberry___healthy                                | Count:   238 | Weight: 2.91
+2025-04-16 10:30:48,082 - INFO - Soybean___healthy                                  | Count:  3262 | Weight: 0.21
+2025-04-16 10:30:48,082 - INFO - Squash___Powdery_mildew                            | Count:  1176 | Weight: 0.59
+2025-04-16 10:30:48,082 - INFO - Strawberry___Leaf_scorch                           | Count:   712 | Weight: 0.97
+2025-04-16 10:30:48,082 - INFO - Strawberry___healthy                               | Count:   294 | Weight: 2.35
+2025-04-16 10:30:48,082 - INFO - Tomato___Bacterial_spot                            | Count:  1374 | Weight: 0.50
+2025-04-16 10:30:48,082 - INFO - Tomato___Early_blight                              | Count:   647 | Weight: 1.07
+2025-04-16 10:30:48,082 - INFO - Tomato___Late_blight                               | Count:  1229 | Weight: 0.56
+2025-04-16 10:30:48,082 - INFO - Tomato___Leaf_Mold                                 | Count:   630 | Weight: 1.10
+2025-04-16 10:30:48,082 - INFO - Tomato___Septoria_leaf_spot                        | Count:  1125 | Weight: 0.62
+2025-04-16 10:30:48,082 - INFO - Tomato___Spider_mites Two-spotted_spider_mite      | Count:  1059 | Weight: 0.65
+2025-04-16 10:30:48,082 - INFO - Tomato___Target_Spot                               | Count:   893 | Weight: 0.77
+2025-04-16 10:30:48,082 - INFO - Tomato___Tomato_Yellow_Leaf_Curl_Virus             | Count:  3442 | Weight: 0.20
+2025-04-16 10:30:48,082 - INFO - Tomato___Tomato_mosaic_virus                       | Count:   230 | Weight: 3.01
+2025-04-16 10:30:48,082 - INFO - Tomato___healthy                                   | Count:  1029 | Weight: 0.67
+2025-04-16 10:30:48,082 - INFO - 
+⚙️ Training Configuration:
+2025-04-16 10:30:48,082 - INFO - - Optimizer: AdamW
+2025-04-16 10:30:48,082 - INFO - - Initial LR: 0.001
+2025-04-16 10:30:48,082 - INFO - - Batch Size: 64
+2025-04-16 10:30:48,082 - INFO - - Epochs: 20
+2025-04-16 10:30:48,082 - INFO - - Class weights: [ 1.7386935   1.7343358   4.023256    0.65592414  0.72612804  1.
+  1.2720588   2.0969696   0.9010417   1.1036682   0.9597781   0.9453552
+  0.7775281   1.0282317   2.562963    0.2         0.46505377  2.944681
+  1.0829421   0.74649405  1.0949367   1.0728682  10.          2.907563
+  0.21213979  0.58843535  0.9719101   2.3537414   0.503639    1.0695518
+  0.5630594   1.0984128   0.6151111   0.6534467   0.774916    0.2010459
+  3.0086956   0.6724976 ]

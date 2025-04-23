@@ -1,0 +1,188 @@
+2025-04-23 17:40:46,035 - INFO - 🚀 Starting training pipeline
+2025-04-23 17:40:46,035 - INFO - Initializing CUDA...
+2025-04-23 17:40:46,144 - INFO - CUDA initialized in 0.11s
+2025-04-23 17:40:46,144 - INFO - Using GPU: NVIDIA GeForce GTX 1050 Ti
+2025-04-23 17:40:46,144 - INFO - Setting up data transformations...
+2025-04-23 17:40:46,144 - INFO - Loading datasets from ./PlantVillage/train and ./PlantVillage/val...
+2025-04-23 17:40:46,378 - INFO - Training set loaded with 43444 images
+2025-04-23 17:40:46,378 - INFO - Validation set loaded with 10861 images
+2025-04-23 17:40:46,394 - INFO - Final splits - Train: 43444, Val: 8688, Test: 2173
+2025-04-23 17:40:46,394 - INFO - 
+Found 38 classes:
+['Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy', 'Blueberry___healthy', 'Cherry_(including_sour)___Powdery_mildew', 'Cherry_(including_sour)___healthy', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot', 'Corn_(maize)___Common_rust_', 'Corn_(maize)___Northern_Leaf_Blight', 'Corn_(maize)___healthy', 'Grape___Black_rot', 'Grape___Esca_(Black_Measles)', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 'Grape___healthy', 'Orange___Haunglongbing_(Citrus_greening)', 'Peach___Bacterial_spot', 'Peach___healthy', 'Pepper,_bell___Bacterial_spot', 'Pepper,_bell___healthy', 'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy', 'Raspberry___healthy', 'Soybean___healthy', 'Squash___Powdery_mildew', 'Strawberry___Leaf_scorch', 'Strawberry___healthy', 'Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy']
+
+2025-04-23 17:40:46,394 - INFO - Initializing model...
+2025-04-23 17:40:46,785 - INFO - Model architecture:
+PlantDiseaseCNN(
+  (features): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Dropout(p=0.3, inplace=False)
+    (5): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (6): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (7): ReLU()
+    (8): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (9): Dropout(p=0.4, inplace=False)
+    (10): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (11): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (12): ReLU()
+    (13): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (14): Dropout(p=0.5, inplace=False)
+  )
+  (pool): AdaptiveAvgPool2d(output_size=(28, 28))
+  (classifier): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=100352, out_features=512, bias=True)
+    (2): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (3): ReLU()
+    (4): Dropout(p=0.5, inplace=False)
+    (5): Linear(in_features=512, out_features=38, bias=True)
+  )
+)
+2025-04-23 17:40:46,785 - INFO - Calculating class weights with optimized balancing...
+2025-04-23 17:40:47,019 - INFO - 
+📊 Class Distribution and Optimized Weights:
+2025-04-23 17:40:47,035 - INFO - Apple___Apple_scab                                 | Count:   504 | Weight: 1.71
+2025-04-23 17:40:47,035 - INFO - Apple___Black_rot                                  | Count:   496 | Weight: 1.74
+2025-04-23 17:40:47,035 - INFO - Apple___Cedar_apple_rust                           | Count:   220 | Weight: 3.91
+2025-04-23 17:40:47,035 - INFO - Apple___healthy                                    | Count:  1316 | Weight: 0.65
+2025-04-23 17:40:47,035 - INFO - Blueberry___healthy                                | Count:  1202 | Weight: 0.72
+2025-04-23 17:40:47,035 - INFO - Cherry_(including_sour)___Powdery_mildew           | Count:   842 | Weight: 1.02
+2025-04-23 17:40:47,035 - INFO - Cherry_(including_sour)___healthy                  | Count:   684 | Weight: 1.26
+2025-04-23 17:40:47,035 - INFO - Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot | Count:   410 | Weight: 2.10
+2025-04-23 17:40:47,035 - INFO - Corn_(maize)___Common_rust_                        | Count:   953 | Weight: 0.90
+2025-04-23 17:40:47,035 - INFO - Corn_(maize)___Northern_Leaf_Blight                | Count:   788 | Weight: 1.09
+2025-04-23 17:40:47,035 - INFO - Corn_(maize)___healthy                             | Count:   929 | Weight: 0.93
+2025-04-23 17:40:47,035 - INFO - Grape___Black_rot                                  | Count:   944 | Weight: 0.91
+2025-04-23 17:40:47,035 - INFO - Grape___Esca_(Black_Measles)                       | Count:  1107 | Weight: 0.78
+2025-04-23 17:40:47,035 - INFO - Grape___Leaf_blight_(Isariopsis_Leaf_Spot)         | Count:   861 | Weight: 1.00
+2025-04-23 17:40:47,035 - INFO - Grape___healthy                                    | Count:   339 | Weight: 2.54
+2025-04-23 17:40:47,035 - INFO - Orange___Haunglongbing_(Citrus_greening)           | Count:  4405 | Weight: 0.20
+2025-04-23 17:40:47,035 - INFO - Peach___Bacterial_spot                             | Count:  1838 | Weight: 0.47
+2025-04-23 17:40:47,035 - INFO - Peach___healthy                                    | Count:   288 | Weight: 2.99
+2025-04-23 17:40:47,035 - INFO - Pepper,_bell___Bacterial_spot                      | Count:   797 | Weight: 1.08
+2025-04-23 17:40:47,035 - INFO - Pepper,_bell___healthy                             | Count:  1183 | Weight: 0.73
+2025-04-23 17:40:47,035 - INFO - Potato___Early_blight                              | Count:   800 | Weight: 1.08
+2025-04-23 17:40:47,035 - INFO - Potato___Late_blight                               | Count:   800 | Weight: 1.08
+2025-04-23 17:40:47,035 - INFO - Potato___healthy                                   | Count:   121 | Weight: 7.12
+2025-04-23 17:40:47,035 - INFO - Raspberry___healthy                                | Count:   297 | Weight: 2.90
+2025-04-23 17:40:47,035 - INFO - Soybean___healthy                                  | Count:  4072 | Weight: 0.21
+2025-04-23 17:40:47,035 - INFO - Squash___Powdery_mildew                            | Count:  1468 | Weight: 0.59
+2025-04-23 17:40:47,035 - INFO - Strawberry___Leaf_scorch                           | Count:   887 | Weight: 0.97
+2025-04-23 17:40:47,035 - INFO - Strawberry___healthy                               | Count:   364 | Weight: 2.37
+2025-04-23 17:40:47,035 - INFO - Tomato___Bacterial_spot                            | Count:  1702 | Weight: 0.51
+2025-04-23 17:40:47,035 - INFO - Tomato___Early_blight                              | Count:   800 | Weight: 1.08
+2025-04-23 17:40:47,035 - INFO - Tomato___Late_blight                               | Count:  1527 | Weight: 0.56
+2025-04-23 17:40:47,035 - INFO - Tomato___Leaf_Mold                                 | Count:   761 | Weight: 1.13
+2025-04-23 17:40:47,035 - INFO - Tomato___Septoria_leaf_spot                        | Count:  1417 | Weight: 0.61
+2025-04-23 17:40:47,035 - INFO - Tomato___Spider_mites Two-spotted_spider_mite      | Count:  1341 | Weight: 0.64
+2025-04-23 17:40:47,035 - INFO - Tomato___Target_Spot                               | Count:  1123 | Weight: 0.77
+2025-04-23 17:40:47,035 - INFO - Tomato___Tomato_Yellow_Leaf_Curl_Virus             | Count:  4286 | Weight: 0.20
+2025-04-23 17:40:47,035 - INFO - Tomato___Tomato_mosaic_virus                       | Count:   299 | Weight: 2.88
+2025-04-23 17:40:47,035 - INFO - Tomato___healthy                                   | Count:  1273 | Weight: 0.68
+2025-04-23 17:40:47,035 - INFO - 
+⚙️ Training Configuration:
+2025-04-23 17:40:47,035 - INFO - - Optimizer: AdamW
+2025-04-23 17:40:47,035 - INFO - - Initial LR: 0.001
+2025-04-23 17:40:47,035 - INFO - - Batch Size: 32
+2025-04-23 17:40:47,035 - INFO - - Epochs: 20
+2025-04-23 17:40:47,050 - INFO - - Class weights: [1.7083334  1.735887   3.9136364  0.65425533 0.71630615 1.0225654
+ 1.2587719  2.1        0.90346277 1.0926396  0.926803   0.9120763
+ 0.7777778  1.         2.539823   0.2        0.46844396 2.9895833
+ 1.0803012  0.7278106  1.07625    1.07625    7.1157026  2.89899
+ 0.211444   0.58651227 0.9706877  2.3653846  0.50587547 1.07625
+ 0.5638507  1.1314061  0.6076217  0.6420582  0.76669633 0.2008866
+ 2.8795986  0.67635506]
+2025-04-23 17:40:47,050 - INFO - 
+🏁 Epoch 1/30 started
+2025-04-23 17:47:01,891 - INFO - 💾 New best model saved with val acc: 55.49%
+2025-04-23 17:47:01,891 - INFO - ✅ Epoch 1 completed in 374.84s
+2025-04-23 17:47:01,891 - INFO - 📊 Train Loss: 1.2133 | Acc: 32.93%
+2025-04-23 17:47:01,891 - INFO - 📈 Val Acc: 55.49% | Best Val Acc: 55.49%
+2025-04-23 17:47:01,891 - INFO - 
+🏁 Epoch 2/30 started
+2025-04-23 17:52:05,516 - INFO - ✅ Epoch 2 completed in 303.62s
+2025-04-23 17:52:05,516 - INFO - 📊 Train Loss: 0.9096 | Acc: 47.00%
+2025-04-23 17:52:05,516 - INFO - 📈 Val Acc: 53.74% | Best Val Acc: 55.49%
+2025-04-23 17:52:05,516 - INFO - 
+🏁 Epoch 3/30 started
+2025-04-23 17:57:19,750 - INFO - 💾 New best model saved with val acc: 59.48%
+2025-04-23 17:57:19,750 - INFO - ✅ Epoch 3 completed in 314.23s
+2025-04-23 17:57:19,750 - INFO - 📊 Train Loss: 0.7767 | Acc: 53.60%
+2025-04-23 17:57:19,766 - INFO - 📈 Val Acc: 59.48% | Best Val Acc: 59.48%
+2025-04-23 17:57:19,766 - INFO - 
+🏁 Epoch 4/30 started
+2025-04-23 18:02:35,094 - INFO - 💾 New best model saved with val acc: 62.88%
+2025-04-23 18:02:35,094 - INFO - ✅ Epoch 4 completed in 315.33s
+2025-04-23 18:02:35,094 - INFO - 📊 Train Loss: 0.6728 | Acc: 58.65%
+2025-04-23 18:02:35,094 - INFO - 📈 Val Acc: 62.88% | Best Val Acc: 62.88%
+2025-04-23 18:02:35,094 - INFO - 
+🏁 Epoch 5/30 started
+2025-04-23 18:07:40,797 - INFO - 💾 New best model saved with val acc: 62.98%
+2025-04-23 18:07:40,797 - INFO - ✅ Epoch 5 completed in 305.70s
+2025-04-23 18:07:40,797 - INFO - 📊 Train Loss: 0.6052 | Acc: 62.40%
+2025-04-23 18:07:40,797 - INFO - 📈 Val Acc: 62.98% | Best Val Acc: 62.98%
+2025-04-23 18:07:40,797 - INFO - 
+🏁 Epoch 6/30 started
+2025-04-23 18:12:42,000 - INFO - ✅ Epoch 6 completed in 301.20s
+2025-04-23 18:12:42,000 - INFO - 📊 Train Loss: 0.5573 | Acc: 64.70%
+2025-04-23 18:12:42,000 - INFO - 📈 Val Acc: 61.71% | Best Val Acc: 62.98%
+2025-04-23 18:12:42,000 - INFO - 
+🏁 Epoch 7/30 started
+2025-04-23 18:20:43,292 - INFO - 💾 New best model saved with val acc: 68.21%
+2025-04-23 18:20:43,355 - INFO - ✅ Epoch 7 completed in 481.35s
+2025-04-23 18:20:43,376 - INFO - 📊 Train Loss: 0.5059 | Acc: 67.68%
+2025-04-23 18:20:43,389 - INFO - 📈 Val Acc: 68.21% | Best Val Acc: 68.21%
+2025-04-23 18:20:43,393 - INFO - 
+🏁 Epoch 8/30 started
+2025-04-23 18:24:08,432 - ERROR - 🔥 Critical error in training pipeline
+Traceback (most recent call last):
+  File "C:\plant_village\training\train_cnn.py", line 331, in run
+    history = self.train(num_epochs=self.epochs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\plant_village\training\train_cnn.py", line 199, in train
+    for batch_idx, (images, labels) in enumerate(loop):
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\tqdm\std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\utils\data\dataloader.py", line 708, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\utils\data\dataloader.py", line 1480, in _next_data
+    return self._process_data(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\utils\data\dataloader.py", line 1505, in _process_data
+    data.reraise()
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\_utils.py", line 733, in reraise
+    raise exception
+RuntimeError: Caught RuntimeError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\utils\data\_utils\worker.py", line 349, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\utils\data\_utils\fetch.py", line 55, in fetch
+    return self.collate_fn(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\utils\data\_utils\collate.py", line 398, in default_collate
+    return collate(batch, collate_fn_map=default_collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\utils\data\_utils\collate.py", line 211, in collate
+    return [
+           ^
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\utils\data\_utils\collate.py", line 212, in <listcomp>
+    collate(samples, collate_fn_map=collate_fn_map)
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\utils\data\_utils\collate.py", line 155, in collate
+    return collate_fn_map[elem_type](batch, collate_fn_map=collate_fn_map)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\utils\data\_utils\collate.py", line 270, in collate_tensor_fn
+    storage = elem._typed_storage()._new_shared(numel, device=elem.device)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\storage.py", line 1198, in _new_shared
+    untyped_storage = torch.UntypedStorage._new_shared(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\storage.py", line 413, in _new_shared
+    return cls._new_using_filename_cpu(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Couldn't open shared file mapping: <torch_11984_1094871283_410>, error code: <1455>
+

@@ -1,0 +1,15 @@
+2025-04-23 10:44:09,444 - INFO - 🚀 Starting training pipeline
+2025-04-23 10:44:09,445 - INFO - Initializing CUDA...
+2025-04-23 10:44:09,725 - INFO - CUDA initialized in 0.28s
+2025-04-23 10:44:09,726 - INFO - Using GPU: NVIDIA GeForce GTX 1050 Ti
+2025-04-23 10:44:09,727 - INFO - Setting up data transformations...
+2025-04-23 10:44:09,728 - INFO - Loading datasets from ./train and ./val...
+2025-04-23 10:44:09,988 - ERROR - Failed to load datasets: name 'copy' is not defined
+2025-04-23 10:44:09,988 - ERROR - 🔥 Critical error in training pipeline
+Traceback (most recent call last):
+  File "C:\plant_village\train_cnn_new.py", line 393, in run
+    self.setup_data()
+  File "C:\plant_village\train_cnn_new.py", line 99, in setup_data
+    test_data = copy.deepcopy(test_data)  # Avoid modifying original
+                ^^^^
+NameError: name 'copy' is not defined

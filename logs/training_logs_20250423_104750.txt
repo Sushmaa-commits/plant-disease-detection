@@ -1,0 +1,119 @@
+2025-04-23 10:47:50,845 - INFO - 🚀 Starting training pipeline
+2025-04-23 10:47:50,845 - INFO - Initializing CUDA...
+2025-04-23 10:47:50,942 - INFO - CUDA initialized in 0.10s
+2025-04-23 10:47:50,943 - INFO - Using GPU: NVIDIA GeForce GTX 1050 Ti
+2025-04-23 10:47:50,944 - INFO - Setting up data transformations...
+2025-04-23 10:47:50,945 - INFO - Loading datasets from ./train and ./val...
+2025-04-23 10:47:51,194 - INFO - Training set loaded with 43444 images
+2025-04-23 10:47:51,195 - INFO - Validation set loaded with 8688 images
+2025-04-23 10:47:51,195 - INFO - Test set loaded with 2173 images
+2025-04-23 10:47:51,195 - INFO - Final splits - Train: 43444, Val: 8688, Test: 2173
+2025-04-23 10:47:51,196 - INFO - 
+Found 38 classes:
+['Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy', 'Blueberry___healthy', 'Cherry_(including_sour)___Powdery_mildew', 'Cherry_(including_sour)___healthy', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot', 'Corn_(maize)___Common_rust_', 'Corn_(maize)___Northern_Leaf_Blight', 'Corn_(maize)___healthy', 'Grape___Black_rot', 'Grape___Esca_(Black_Measles)', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 'Grape___healthy', 'Orange___Haunglongbing_(Citrus_greening)', 'Peach___Bacterial_spot', 'Peach___healthy', 'Pepper,_bell___Bacterial_spot', 'Pepper,_bell___healthy', 'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy', 'Raspberry___healthy', 'Soybean___healthy', 'Squash___Powdery_mildew', 'Strawberry___Leaf_scorch', 'Strawberry___healthy', 'Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy']
+
+2025-04-23 10:48:12,592 - INFO - 
+📊 Dataset Class Distribution:
+
+Class                                              |    Train      % |      Val      % |     Test      % |    Total      %
+---------------------------------------------------------------------------------------------------------------------------
+Apple___Apple_scab                                 |      504   1.2% |       97   1.1% |       29   1.3% |      630   1.2%
+Apple___Black_rot                                  |      496   1.1% |      102   1.2% |       23   1.1% |      621   1.1%
+Apple___Cedar_apple_rust                           |      220   0.5% |       46   0.5% |        9   0.4% |      275   0.5%
+Apple___healthy                                    |     1316   3.0% |      258   3.0% |       71   3.3% |     1645   3.0%
+Blueberry___healthy                                |     1202   2.8% |      240   2.8% |       60   2.8% |     1502   2.8%
+Cherry_(including_sour)___Powdery_mildew           |      842   1.9% |      156   1.8% |       54   2.5% |     1052   1.9%
+Cherry_(including_sour)___healthy                  |      684   1.6% |      130   1.5% |       40   1.8% |      854   1.6%
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot |      410   0.9% |       84   1.0% |       19   0.9% |      513   0.9%
+Corn_(maize)___Common_rust_                        |      953   2.2% |      196   2.3% |       43   2.0% |     1192   2.2%
+Corn_(maize)___Northern_Leaf_Blight                |      788   1.8% |      161   1.9% |       36   1.7% |      985   1.8%
+Corn_(maize)___healthy                             |      929   2.1% |      191   2.2% |       42   1.9% |     1162   2.1%
+Grape___Black_rot                                  |      944   2.2% |      193   2.2% |       43   2.0% |     1180   2.2%
+Grape___Esca_(Black_Measles)                       |     1107   2.5% |      224   2.6% |       52   2.4% |     1383   2.5%
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)         |      861   2.0% |      176   2.0% |       39   1.8% |     1076   2.0%
+Grape___healthy                                    |      339   0.8% |       73   0.8% |       11   0.5% |      423   0.8%
+Orange___Haunglongbing_(Citrus_greening)           |     4405  10.1% |      892  10.3% |      210   9.7% |     5507  10.1%
+Peach___Bacterial_spot                             |     1838   4.2% |      367   4.2% |       92   4.2% |     2297   4.2%
+Peach___healthy                                    |      288   0.7% |       55   0.6% |       17   0.8% |      360   0.7%
+Pepper,_bell___Bacterial_spot                      |      797   1.8% |      160   1.8% |       40   1.8% |      997   1.8%
+Pepper,_bell___healthy                             |     1183   2.7% |      223   2.6% |       72   3.3% |     1478   2.7%
+Potato___Early_blight                              |      800   1.8% |      163   1.9% |       37   1.7% |     1000   1.8%
+Potato___Late_blight                               |      800   1.8% |      156   1.8% |       44   2.0% |     1000   1.8%
+Potato___healthy                                   |      121   0.3% |       23   0.3% |        8   0.4% |      152   0.3%
+Raspberry___healthy                                |      297   0.7% |       59   0.7% |       15   0.7% |      371   0.7%
+Soybean___healthy                                  |     4072   9.4% |      795   9.2% |      223  10.3% |     5090   9.4%
+Squash___Powdery_mildew                            |     1468   3.4% |      303   3.5% |       64   2.9% |     1835   3.4%
+Strawberry___Leaf_scorch                           |      887   2.0% |      171   2.0% |       51   2.3% |     1109   2.0%
+Strawberry___healthy                               |      364   0.8% |       79   0.9% |       13   0.6% |      456   0.8%
+Tomato___Bacterial_spot                            |     1702   3.9% |      335   3.9% |       90   4.1% |     2127   3.9%
+Tomato___Early_blight                              |      800   1.8% |      156   1.8% |       44   2.0% |     1000   1.8%
+Tomato___Late_blight                               |     1527   3.5% |      326   3.8% |       56   2.6% |     1909   3.5%
+Tomato___Leaf_Mold                                 |      761   1.8% |      157   1.8% |       34   1.6% |      952   1.8%
+Tomato___Septoria_leaf_spot                        |     1417   3.3% |      290   3.3% |       64   2.9% |     1771   3.3%
+Tomato___Spider_mites Two-spotted_spider_mite      |     1341   3.1% |      266   3.1% |       69   3.2% |     1676   3.1%
+Tomato___Target_Spot                               |     1123   2.6% |      218   2.5% |       63   2.9% |     1404   2.6%
+Tomato___Tomato_Yellow_Leaf_Curl_Virus             |     4286   9.9% |      855   9.8% |      216   9.9% |     5357   9.9%
+Tomato___Tomato_mosaic_virus                       |      299   0.7% |       53   0.6% |       21   1.0% |      373   0.7%
+Tomato___healthy                                   |     1273   2.9% |      259   3.0% |       59   2.7% |     1591   2.9%
+---------------------------------------------------------------------------------------------------------------------------
+TOTAL                                              |    43444   100% |     8688   100% |     2173   100% |    54305   100%
+2025-04-23 10:48:12,594 - INFO - Initializing model...
+2025-04-23 10:48:12,762 - INFO - Model architecture:
+PlantDiseaseCNN(
+  (features): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+    (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU(inplace=True)
+    (6): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (7): Dropout(p=0.3, inplace=False)
+    (8): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (9): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (12): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (13): ReLU(inplace=True)
+    (14): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (15): Dropout(p=0.4, inplace=False)
+    (16): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (17): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (18): ReLU(inplace=True)
+    (19): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (20): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (21): ReLU(inplace=True)
+    (22): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (23): Dropout(p=0.5, inplace=False)
+  )
+  (pool): AdaptiveAvgPool2d(output_size=(7, 7))
+  (classifier): Sequential(
+    (0): Linear(in_features=6272, out_features=1024, bias=True)
+    (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+    (3): Dropout(p=0.6, inplace=False)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU(inplace=True)
+    (7): Dropout(p=0.5, inplace=False)
+    (8): Linear(in_features=512, out_features=38, bias=True)
+  )
+)
+2025-04-23 10:48:12,763 - INFO - Calculating class weights with optimized balancing...
+2025-04-23 10:48:12,992 - INFO - 
+📊 Class Distribution and Optimized Weights:
+2025-04-23 10:48:12,992 - INFO - Class                                                |   Count |  Weight |  Effective Samples
+2025-04-23 10:48:12,993 - INFO - ---------------------------------------------------------------------------------------------
+2025-04-23 10:48:12,998 - ERROR - 🔥 Critical error in training pipeline
+Traceback (most recent call last):
+  File "C:\plant_village\train_cnn_new.py", line 471, in run
+    self.setup_optimization()
+  File "C:\plant_village\train_cnn_new.py", line 281, in setup_optimization
+    class_weights = get_class_weights()
+                    ^^^^^^^^^^^^^^^^^^^
+  File "C:\plant_village\train_cnn_new.py", line 272, in get_class_weights
+    f"{self.class_names[i]:<{max_name_length}} | "
+  File "C:\Users\subooom\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\torch\_tensor.py", line 1097, in __format__
+    return self.item().__format__(format_spec)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Invalid format specifier '.2f:>7' for object of type 'float'

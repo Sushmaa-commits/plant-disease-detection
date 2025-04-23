@@ -1,0 +1,18 @@
+2025-04-23 10:45:01,508 - INFO - 🚀 Starting training pipeline
+2025-04-23 10:45:01,509 - INFO - Initializing CUDA...
+2025-04-23 10:45:01,616 - INFO - CUDA initialized in 0.11s
+2025-04-23 10:45:01,617 - INFO - Using GPU: NVIDIA GeForce GTX 1050 Ti
+2025-04-23 10:45:01,617 - INFO - Setting up data transformations...
+2025-04-23 10:45:01,618 - INFO - Loading datasets from ./train and ./val...
+2025-04-23 10:45:01,877 - INFO - Training set loaded with 43444 images
+2025-04-23 10:45:01,877 - INFO - Validation set loaded with 8688 images
+2025-04-23 10:45:01,878 - INFO - Test set loaded with 2173 images
+2025-04-23 10:45:01,878 - INFO - Final splits - Train: 43444, Val: 8688, Test: 2173
+2025-04-23 10:45:01,878 - ERROR - 🔥 Critical error in training pipeline
+Traceback (most recent call last):
+  File "C:\plant_village\train_cnn_new.py", line 394, in run
+    self.setup_data()
+  File "C:\plant_village\train_cnn_new.py", line 118, in setup_data
+    batch_size=self.batch_size,  # Should be class attribute
+               ^^^^^^^^^^^^^^^
+AttributeError: 'PlantDiseaseTrainer' object has no attribute 'batch_size'

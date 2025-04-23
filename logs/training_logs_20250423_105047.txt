@@ -1,0 +1,278 @@
+2025-04-23 10:50:47,344 - INFO - 🚀 Starting training pipeline
+2025-04-23 10:50:47,345 - INFO - Initializing CUDA...
+2025-04-23 10:50:47,445 - INFO - CUDA initialized in 0.10s
+2025-04-23 10:50:47,447 - INFO - Using GPU: NVIDIA GeForce GTX 1050 Ti
+2025-04-23 10:50:47,448 - INFO - Setting up data transformations...
+2025-04-23 10:50:47,449 - INFO - Loading datasets from ./train and ./val...
+2025-04-23 10:50:47,715 - INFO - Training set loaded with 43444 images
+2025-04-23 10:50:47,715 - INFO - Validation set loaded with 8688 images
+2025-04-23 10:50:47,716 - INFO - Test set loaded with 2173 images
+2025-04-23 10:50:47,717 - INFO - Final splits - Train: 43444, Val: 8688, Test: 2173
+2025-04-23 10:50:47,717 - INFO - 
+Found 38 classes:
+['Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy', 'Blueberry___healthy', 'Cherry_(including_sour)___Powdery_mildew', 'Cherry_(including_sour)___healthy', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot', 'Corn_(maize)___Common_rust_', 'Corn_(maize)___Northern_Leaf_Blight', 'Corn_(maize)___healthy', 'Grape___Black_rot', 'Grape___Esca_(Black_Measles)', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 'Grape___healthy', 'Orange___Haunglongbing_(Citrus_greening)', 'Peach___Bacterial_spot', 'Peach___healthy', 'Pepper,_bell___Bacterial_spot', 'Pepper,_bell___healthy', 'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy', 'Raspberry___healthy', 'Soybean___healthy', 'Squash___Powdery_mildew', 'Strawberry___Leaf_scorch', 'Strawberry___healthy', 'Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy']
+
+2025-04-23 10:51:04,036 - INFO - 
+📊 Dataset Class Distribution:
+
+Class                                              |    Train      % |      Val      % |     Test      % |    Total      %
+---------------------------------------------------------------------------------------------------------------------------
+Apple___Apple_scab                                 |      504   1.2% |       99   1.1% |       27   1.2% |      630   1.2%
+Apple___Black_rot                                  |      496   1.1% |      107   1.2% |       18   0.8% |      621   1.1%
+Apple___Cedar_apple_rust                           |      220   0.5% |       45   0.5% |       10   0.5% |      275   0.5%
+Apple___healthy                                    |     1316   3.0% |      258   3.0% |       71   3.3% |     1645   3.0%
+Blueberry___healthy                                |     1202   2.8% |      247   2.8% |       53   2.4% |     1502   2.8%
+Cherry_(including_sour)___Powdery_mildew           |      842   1.9% |      170   2.0% |       40   1.8% |     1052   1.9%
+Cherry_(including_sour)___healthy                  |      684   1.6% |      132   1.5% |       38   1.7% |      854   1.6%
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot |      410   0.9% |       79   0.9% |       24   1.1% |      513   0.9%
+Corn_(maize)___Common_rust_                        |      953   2.2% |      186   2.1% |       53   2.4% |     1192   2.2%
+Corn_(maize)___Northern_Leaf_Blight                |      788   1.8% |      161   1.9% |       36   1.7% |      985   1.8%
+Corn_(maize)___healthy                             |      929   2.1% |      199   2.3% |       34   1.6% |     1162   2.1%
+Grape___Black_rot                                  |      944   2.2% |      181   2.1% |       55   2.5% |     1180   2.2%
+Grape___Esca_(Black_Measles)                       |     1107   2.5% |      223   2.6% |       53   2.4% |     1383   2.5%
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot)         |      861   2.0% |      174   2.0% |       41   1.9% |     1076   2.0%
+Grape___healthy                                    |      339   0.8% |       66   0.8% |       18   0.8% |      423   0.8%
+Orange___Haunglongbing_(Citrus_greening)           |     4405  10.1% |      887  10.2% |      215   9.9% |     5507  10.1%
+Peach___Bacterial_spot                             |     1838   4.2% |      372   4.3% |       87   4.0% |     2297   4.2%
+Peach___healthy                                    |      288   0.7% |       62   0.7% |       10   0.5% |      360   0.7%
+Pepper,_bell___Bacterial_spot                      |      797   1.8% |      149   1.7% |       51   2.3% |      997   1.8%
+Pepper,_bell___healthy                             |     1183   2.7% |      223   2.6% |       72   3.3% |     1478   2.7%
+Potato___Early_blight                              |      800   1.8% |      153   1.8% |       47   2.2% |     1000   1.8%
+Potato___Late_blight                               |      800   1.8% |      158   1.8% |       42   1.9% |     1000   1.8%
+Potato___healthy                                   |      121   0.3% |       26   0.3% |        5   0.2% |      152   0.3%
+Raspberry___healthy                                |      297   0.7% |       60   0.7% |       14   0.6% |      371   0.7%
+Soybean___healthy                                  |     4072   9.4% |      799   9.2% |      219  10.1% |     5090   9.4%
+Squash___Powdery_mildew                            |     1468   3.4% |      307   3.5% |       60   2.8% |     1835   3.4%
+Strawberry___Leaf_scorch                           |      887   2.0% |      190   2.2% |       32   1.5% |     1109   2.0%
+Strawberry___healthy                               |      364   0.8% |       72   0.8% |       20   0.9% |      456   0.8%
+Tomato___Bacterial_spot                            |     1702   3.9% |      333   3.8% |       92   4.2% |     2127   3.9%
+Tomato___Early_blight                              |      800   1.8% |      165   1.9% |       35   1.6% |     1000   1.8%
+Tomato___Late_blight                               |     1527   3.5% |      320   3.7% |       62   2.9% |     1909   3.5%
+Tomato___Leaf_Mold                                 |      761   1.8% |      149   1.7% |       42   1.9% |      952   1.8%
+Tomato___Septoria_leaf_spot                        |     1417   3.3% |      291   3.3% |       63   2.9% |     1771   3.3%
+Tomato___Spider_mites Two-spotted_spider_mite      |     1341   3.1% |      263   3.0% |       72   3.3% |     1676   3.1%
+Tomato___Target_Spot                               |     1123   2.6% |      212   2.4% |       69   3.2% |     1404   2.6%
+Tomato___Tomato_Yellow_Leaf_Curl_Virus             |     4286   9.9% |      859   9.9% |      212   9.8% |     5357   9.9%
+Tomato___Tomato_mosaic_virus                       |      299   0.7% |       59   0.7% |       15   0.7% |      373   0.7%
+Tomato___healthy                                   |     1273   2.9% |      252   2.9% |       66   3.0% |     1591   2.9%
+---------------------------------------------------------------------------------------------------------------------------
+TOTAL                                              |    43444   100% |     8688   100% |     2173   100% |    54305   100%
+2025-04-23 10:51:04,037 - INFO - Initializing model...
+2025-04-23 10:51:04,179 - INFO - Model architecture:
+PlantDiseaseCNN(
+  (features): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+    (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU(inplace=True)
+    (6): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (7): Dropout(p=0.3, inplace=False)
+    (8): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (9): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU(inplace=True)
+    (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (12): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (13): ReLU(inplace=True)
+    (14): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (15): Dropout(p=0.4, inplace=False)
+    (16): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (17): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (18): ReLU(inplace=True)
+    (19): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (20): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (21): ReLU(inplace=True)
+    (22): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (23): Dropout(p=0.5, inplace=False)
+  )
+  (pool): AdaptiveAvgPool2d(output_size=(7, 7))
+  (classifier): Sequential(
+    (0): Linear(in_features=6272, out_features=1024, bias=True)
+    (1): BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+    (3): Dropout(p=0.6, inplace=False)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (6): ReLU(inplace=True)
+    (7): Dropout(p=0.5, inplace=False)
+    (8): Linear(in_features=512, out_features=38, bias=True)
+  )
+)
+2025-04-23 10:51:04,181 - INFO - Calculating class weights with optimized balancing...
+2025-04-23 10:51:04,373 - INFO - 
+📊 Class Distribution and Optimized Weights:
+2025-04-23 10:51:04,374 - INFO - Class                                                |   Count |  Weight |  Effective Samples
+2025-04-23 10:51:04,374 - INFO - ---------------------------------------------------------------------------------------------
+2025-04-23 10:51:04,375 - INFO - Apple___Apple_scab                                   |     504 |    1.71 |              861.0
+2025-04-23 10:51:04,375 - INFO - Apple___Black_rot                                    |     496 |    1.74 |              861.0
+2025-04-23 10:51:04,375 - INFO - Apple___Cedar_apple_rust                             |     220 |    3.91 |              861.0
+2025-04-23 10:51:04,376 - INFO - Apple___healthy                                      |    1316 |    0.65 |              861.0
+2025-04-23 10:51:04,376 - INFO - Blueberry___healthy                                  |    1202 |    0.72 |              861.0
+2025-04-23 10:51:04,376 - INFO - Cherry_(including_sour)___Powdery_mildew             |     842 |    1.02 |              861.0
+2025-04-23 10:51:04,376 - INFO - Cherry_(including_sour)___healthy                    |     684 |    1.26 |              861.0
+2025-04-23 10:51:04,377 - INFO - Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot   |     410 |    2.10 |              861.0
+2025-04-23 10:51:04,377 - INFO - Corn_(maize)___Common_rust_                          |     953 |    0.90 |              861.0
+2025-04-23 10:51:04,377 - INFO - Corn_(maize)___Northern_Leaf_Blight                  |     788 |    1.09 |              861.0
+2025-04-23 10:51:04,378 - INFO - Corn_(maize)___healthy                               |     929 |    0.93 |              861.0
+2025-04-23 10:51:04,378 - INFO - Grape___Black_rot                                    |     944 |    0.91 |              861.0
+2025-04-23 10:51:04,378 - INFO - Grape___Esca_(Black_Measles)                         |    1107 |    0.78 |              861.0
+2025-04-23 10:51:04,379 - INFO - Grape___Leaf_blight_(Isariopsis_Leaf_Spot)           |     861 |    1.00 |              861.0
+2025-04-23 10:51:04,379 - INFO - Grape___healthy                                      |     339 |    2.54 |              861.0
+2025-04-23 10:51:04,379 - INFO - Orange___Haunglongbing_(Citrus_greening)             |    4405 |    0.20 |              861.0
+2025-04-23 10:51:04,380 - INFO - Peach___Bacterial_spot                               |    1838 |    0.47 |              861.0
+2025-04-23 10:51:04,381 - INFO - Peach___healthy                                      |     288 |    2.99 |              861.0
+2025-04-23 10:51:04,381 - INFO - Pepper,_bell___Bacterial_spot                        |     797 |    1.08 |              861.0
+2025-04-23 10:51:04,382 - INFO - Pepper,_bell___healthy                               |    1183 |    0.73 |              861.0
+2025-04-23 10:51:04,382 - INFO - Potato___Early_blight                                |     800 |    1.08 |              861.0
+2025-04-23 10:51:04,382 - INFO - Potato___Late_blight                                 |     800 |    1.08 |              861.0
+2025-04-23 10:51:04,382 - INFO - Potato___healthy                                     |     121 |    7.12 |              861.0
+2025-04-23 10:51:04,383 - INFO - Raspberry___healthy                                  |     297 |    2.90 |              861.0
+2025-04-23 10:51:04,383 - INFO - Soybean___healthy                                    |    4072 |    0.21 |              861.0
+2025-04-23 10:51:04,383 - INFO - Squash___Powdery_mildew                              |    1468 |    0.59 |              861.0
+2025-04-23 10:51:04,384 - INFO - Strawberry___Leaf_scorch                             |     887 |    0.97 |              861.0
+2025-04-23 10:51:04,384 - INFO - Strawberry___healthy                                 |     364 |    2.37 |              861.0
+2025-04-23 10:51:04,384 - INFO - Tomato___Bacterial_spot                              |    1702 |    0.51 |              861.0
+2025-04-23 10:51:04,385 - INFO - Tomato___Early_blight                                |     800 |    1.08 |              861.0
+2025-04-23 10:51:04,385 - INFO - Tomato___Late_blight                                 |    1527 |    0.56 |              861.0
+2025-04-23 10:51:04,385 - INFO - Tomato___Leaf_Mold                                   |     761 |    1.13 |              861.0
+2025-04-23 10:51:04,386 - INFO - Tomato___Septoria_leaf_spot                          |    1417 |    0.61 |              861.0
+2025-04-23 10:51:04,386 - INFO - Tomato___Spider_mites Two-spotted_spider_mite        |    1341 |    0.64 |              861.0
+2025-04-23 10:51:04,386 - INFO - Tomato___Target_Spot                                 |    1123 |    0.77 |              861.0
+2025-04-23 10:51:04,386 - INFO - Tomato___Tomato_Yellow_Leaf_Curl_Virus               |    4286 |    0.20 |              861.0
+2025-04-23 10:51:04,387 - INFO - Tomato___Tomato_mosaic_virus                         |     299 |    2.88 |              861.0
+2025-04-23 10:51:04,387 - INFO - Tomato___healthy                                     |    1273 |    0.68 |              861.0
+2025-04-23 10:51:04,390 - INFO - 
+⚙️ Training Configuration:
+2025-04-23 10:51:04,390 - INFO - - Optimizer: AdamW (layer-wise LR)
+2025-04-23 10:51:04,391 - INFO - - Backbone LR: 0.0003999999999999993
+2025-04-23 10:51:04,391 - INFO - - Classifier LR: 0.0003999999999999993
+2025-04-23 10:51:04,391 - INFO - - Batch Size: 32
+2025-04-23 10:51:04,391 - INFO - - Epochs: 20
+2025-04-23 10:51:04,392 - INFO - - Label Smoothing: 0.1
+2025-04-23 10:51:04,392 - INFO - - Max LR: 0.01 (OneCycle)
+2025-04-23 10:51:04,579 - INFO - - Class weights: Min 0.20, Max 7.12
+2025-04-23 10:51:04,580 - INFO - 
+🏁 Epoch 1/20 started
+2025-04-23 11:01:20,719 - INFO - 💾 New best model saved with val acc: 49.46%
+2025-04-23 11:01:20,781 - INFO - ✅ Epoch 1 completed in 616.20s
+2025-04-23 11:01:20,783 - INFO - 📊 Train Loss: 1.5681 | Acc: 29.20%
+2025-04-23 11:01:20,784 - INFO - 📈 Val Acc: 49.46% | Best Val Acc: 49.46%
+2025-04-23 11:01:20,790 - INFO - 
+🏁 Epoch 2/20 started
+2025-04-23 11:09:56,299 - INFO - 💾 New best model saved with val acc: 56.15%
+2025-04-23 11:09:56,300 - INFO - ✅ Epoch 2 completed in 515.51s
+2025-04-23 11:09:56,300 - INFO - 📊 Train Loss: 1.2930 | Acc: 46.21%
+2025-04-23 11:09:56,300 - INFO - 📈 Val Acc: 56.15% | Best Val Acc: 56.15%
+2025-04-23 11:09:56,301 - INFO - 
+🏁 Epoch 3/20 started
+2025-04-23 11:16:54,925 - INFO - 💾 New best model saved with val acc: 59.97%
+2025-04-23 11:16:54,926 - INFO - ✅ Epoch 3 completed in 418.63s
+2025-04-23 11:16:54,927 - INFO - 📊 Train Loss: 1.1361 | Acc: 56.68%
+2025-04-23 11:16:54,927 - INFO - 📈 Val Acc: 59.97% | Best Val Acc: 59.97%
+2025-04-23 11:16:54,927 - INFO - 
+🏁 Epoch 4/20 started
+2025-04-23 11:23:52,847 - INFO - 💾 New best model saved with val acc: 74.16%
+2025-04-23 11:23:52,847 - INFO - ✅ Epoch 4 completed in 417.92s
+2025-04-23 11:23:52,847 - INFO - 📊 Train Loss: 1.0418 | Acc: 63.51%
+2025-04-23 11:23:52,847 - INFO - 📈 Val Acc: 74.16% | Best Val Acc: 74.16%
+2025-04-23 11:23:52,847 - INFO - 
+🏁 Epoch 5/20 started
+2025-04-23 11:30:51,797 - INFO - 💾 New best model saved with val acc: 76.32%
+2025-04-23 11:30:51,798 - INFO - ✅ Epoch 5 completed in 418.95s
+2025-04-23 11:30:51,798 - INFO - 📊 Train Loss: 0.9917 | Acc: 67.83%
+2025-04-23 11:30:51,799 - INFO - 📈 Val Acc: 76.32% | Best Val Acc: 76.32%
+2025-04-23 11:30:51,799 - INFO - 
+🏁 Epoch 6/20 started
+2025-04-23 11:37:50,570 - INFO - 💾 New best model saved with val acc: 76.72%
+2025-04-23 11:37:50,570 - INFO - ✅ Epoch 6 completed in 418.77s
+2025-04-23 11:37:50,570 - INFO - 📊 Train Loss: 0.9486 | Acc: 71.03%
+2025-04-23 11:37:50,571 - INFO - 📈 Val Acc: 76.72% | Best Val Acc: 76.72%
+2025-04-23 11:37:50,571 - INFO - 
+🏁 Epoch 7/20 started
+2025-04-23 11:44:49,462 - INFO - 💾 New best model saved with val acc: 77.76%
+2025-04-23 11:44:49,463 - INFO - ✅ Epoch 7 completed in 418.89s
+2025-04-23 11:44:49,463 - INFO - 📊 Train Loss: 0.9146 | Acc: 73.47%
+2025-04-23 11:44:49,463 - INFO - 📈 Val Acc: 77.76% | Best Val Acc: 77.76%
+2025-04-23 11:44:49,464 - INFO - 
+🏁 Epoch 8/20 started
+2025-04-23 11:51:48,176 - INFO - 💾 New best model saved with val acc: 81.66%
+2025-04-23 11:51:48,176 - INFO - ✅ Epoch 8 completed in 418.71s
+2025-04-23 11:51:48,176 - INFO - 📊 Train Loss: 0.8883 | Acc: 75.66%
+2025-04-23 11:51:48,177 - INFO - 📈 Val Acc: 81.66% | Best Val Acc: 81.66%
+2025-04-23 11:51:48,177 - INFO - 
+🏁 Epoch 9/20 started
+2025-04-23 11:58:44,535 - INFO - 💾 New best model saved with val acc: 84.28%
+2025-04-23 11:58:44,535 - INFO - ✅ Epoch 9 completed in 416.36s
+2025-04-23 11:58:44,535 - INFO - 📊 Train Loss: 0.8668 | Acc: 77.44%
+2025-04-23 11:58:44,535 - INFO - 📈 Val Acc: 84.28% | Best Val Acc: 84.28%
+2025-04-23 11:58:44,535 - INFO - 
+🏁 Epoch 10/20 started
+2025-04-23 12:05:40,312 - INFO - 💾 New best model saved with val acc: 86.29%
+2025-04-23 12:05:40,312 - INFO - ✅ Epoch 10 completed in 415.78s
+2025-04-23 12:05:40,312 - INFO - 📊 Train Loss: 0.8479 | Acc: 78.75%
+2025-04-23 12:05:40,312 - INFO - 📈 Val Acc: 86.29% | Best Val Acc: 86.29%
+2025-04-23 12:05:40,312 - INFO - 
+🏁 Epoch 11/20 started
+2025-04-23 12:12:35,685 - INFO - ✅ Epoch 11 completed in 415.37s
+2025-04-23 12:12:35,685 - INFO - 📊 Train Loss: 0.8322 | Acc: 80.16%
+2025-04-23 12:12:35,685 - INFO - 📈 Val Acc: 85.52% | Best Val Acc: 86.29%
+2025-04-23 12:12:35,685 - INFO - 
+🏁 Epoch 12/20 started
+2025-04-23 12:19:31,414 - INFO - 💾 New best model saved with val acc: 88.50%
+2025-04-23 12:19:31,414 - INFO - ✅ Epoch 12 completed in 415.73s
+2025-04-23 12:19:31,414 - INFO - 📊 Train Loss: 0.8231 | Acc: 81.10%
+2025-04-23 12:19:31,414 - INFO - 📈 Val Acc: 88.50% | Best Val Acc: 88.50%
+2025-04-23 12:19:31,414 - INFO - 
+🏁 Epoch 13/20 started
+2025-04-23 12:26:33,283 - INFO - 💾 New best model saved with val acc: 91.10%
+2025-04-23 12:26:33,283 - INFO - ✅ Epoch 13 completed in 421.87s
+2025-04-23 12:26:33,284 - INFO - 📊 Train Loss: 0.8059 | Acc: 82.35%
+2025-04-23 12:26:33,284 - INFO - 📈 Val Acc: 91.10% | Best Val Acc: 91.10%
+2025-04-23 12:26:33,284 - INFO - 
+🏁 Epoch 14/20 started
+2025-04-23 12:34:15,944 - INFO - 💾 New best model saved with val acc: 92.25%
+2025-04-23 12:34:15,944 - INFO - ✅ Epoch 14 completed in 462.66s
+2025-04-23 12:34:15,945 - INFO - 📊 Train Loss: 0.7951 | Acc: 83.57%
+2025-04-23 12:34:15,945 - INFO - 📈 Val Acc: 92.25% | Best Val Acc: 92.25%
+2025-04-23 12:34:15,946 - INFO - 
+🏁 Epoch 15/20 started
+2025-04-23 12:41:14,291 - INFO - 💾 New best model saved with val acc: 92.96%
+2025-04-23 12:41:14,292 - INFO - ✅ Epoch 15 completed in 418.35s
+2025-04-23 12:41:14,292 - INFO - 📊 Train Loss: 0.7833 | Acc: 84.17%
+2025-04-23 12:41:14,292 - INFO - 📈 Val Acc: 92.96% | Best Val Acc: 92.96%
+2025-04-23 12:41:14,292 - INFO - 
+🏁 Epoch 16/20 started
+2025-04-23 12:48:10,977 - INFO - ✅ Epoch 16 completed in 416.68s
+2025-04-23 12:48:10,977 - INFO - 📊 Train Loss: 0.7717 | Acc: 85.02%
+2025-04-23 12:48:10,978 - INFO - 📈 Val Acc: 92.71% | Best Val Acc: 92.96%
+2025-04-23 12:48:10,978 - INFO - 
+🏁 Epoch 17/20 started
+2025-04-23 12:55:07,147 - INFO - 💾 New best model saved with val acc: 93.32%
+2025-04-23 12:55:07,147 - INFO - ✅ Epoch 17 completed in 416.17s
+2025-04-23 12:55:07,147 - INFO - 📊 Train Loss: 0.7669 | Acc: 85.71%
+2025-04-23 12:55:07,147 - INFO - 📈 Val Acc: 93.32% | Best Val Acc: 93.32%
+2025-04-23 12:55:07,147 - INFO - 
+🏁 Epoch 18/20 started
+2025-04-23 13:02:05,695 - INFO - 💾 New best model saved with val acc: 94.71%
+2025-04-23 13:02:05,695 - INFO - ✅ Epoch 18 completed in 418.55s
+2025-04-23 13:02:05,695 - INFO - 📊 Train Loss: 0.7549 | Acc: 86.32%
+2025-04-23 13:02:05,695 - INFO - 📈 Val Acc: 94.71% | Best Val Acc: 94.71%
+2025-04-23 13:02:05,695 - INFO - 
+🏁 Epoch 19/20 started
+2025-04-23 13:09:03,631 - INFO - ✅ Epoch 19 completed in 417.94s
+2025-04-23 13:09:03,631 - INFO - 📊 Train Loss: 0.7476 | Acc: 87.14%
+2025-04-23 13:09:03,631 - INFO - 📈 Val Acc: 94.58% | Best Val Acc: 94.71%
+2025-04-23 13:09:03,631 - INFO - 
+🏁 Epoch 20/20 started
+2025-04-23 13:15:58,941 - INFO - ✅ Epoch 20 completed in 415.31s
+2025-04-23 13:15:58,941 - INFO - 📊 Train Loss: 0.7405 | Acc: 87.81%
+2025-04-23 13:15:58,941 - INFO - 📈 Val Acc: 94.08% | Best Val Acc: 94.71%
+2025-04-23 13:16:00,598 - INFO - 📈 Training curves saved to training_curves.png
+2025-04-23 13:16:00,598 - INFO - 
+🧪 Starting final evaluation...
+2025-04-23 13:16:28,239 - INFO - 📝 Classification report saved to classification_report.txt
+2025-04-23 13:16:30,895 - INFO - 📊 Confusion matrix saved to confusion_matrix.png
+2025-04-23 13:16:30,895 - INFO - 
+🏁 Training completed in 2.42 hours
+2025-04-23 13:16:30,895 - INFO - 📄 Full logs saved to: ./logs/training_logs_20250423_105047.txt

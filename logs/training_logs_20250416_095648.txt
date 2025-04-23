@@ -1,0 +1,100 @@
+2025-04-16 09:56:48,252 - INFO - Initializing CUDA...
+2025-04-16 09:56:48,336 - INFO - CUDA initialized in 0.08s
+2025-04-16 09:56:48,336 - INFO - Using GPU: NVIDIA GeForce GTX 1050 Ti
+2025-04-16 09:56:48,336 - INFO - Setting up data transformations...
+2025-04-16 09:56:48,336 - INFO - Loading dataset from ./train...
+2025-04-16 09:56:48,519 - INFO - Dataset loaded successfully with 43444 images
+2025-04-16 09:56:48,519 - INFO - Splitting dataset...
+2025-04-16 09:56:48,519 - INFO - Creating data loaders...
+2025-04-16 09:56:48,519 - INFO - 
+Found 38 classes:
+['Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy', 'Blueberry___healthy', 'Cherry_(including_sour)___Powdery_mildew', 'Cherry_(including_sour)___healthy', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot', 'Corn_(maize)___Common_rust_', 'Corn_(maize)___Northern_Leaf_Blight', 'Corn_(maize)___healthy', 'Grape___Black_rot', 'Grape___Esca_(Black_Measles)', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 'Grape___healthy', 'Orange___Haunglongbing_(Citrus_greening)', 'Peach___Bacterial_spot', 'Peach___healthy', 'Pepper,_bell___Bacterial_spot', 'Pepper,_bell___healthy', 'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy', 'Raspberry___healthy', 'Soybean___healthy', 'Squash___Powdery_mildew', 'Strawberry___Leaf_scorch', 'Strawberry___healthy', 'Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy']
+
+2025-04-16 09:56:48,519 - INFO - Initializing model...
+2025-04-16 09:56:48,918 - INFO - Model architecture:
+PlantDiseaseCNN(
+  (features): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Dropout(p=0.2, inplace=False)
+    (5): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (6): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (7): ReLU()
+    (8): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (9): Dropout(p=0.3, inplace=False)
+    (10): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (11): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (12): ReLU()
+    (13): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (14): Dropout(p=0.4, inplace=False)
+  )
+  (classifier): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=100352, out_features=512, bias=True)
+    (2): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (3): ReLU()
+    (4): Dropout(p=0.5, inplace=False)
+    (5): Linear(in_features=512, out_features=38, bias=True)
+  )
+)
+2025-04-16 09:56:48,918 - INFO - Calculating class weights with optimized balancing...
+2025-04-16 09:56:49,114 - INFO - 
+📊 Class Distribution and Optimized Weights:
+2025-04-16 09:56:49,115 - INFO - Apple___Apple_scab                                 | Count:   411 | Weight: 1.67
+2025-04-16 09:56:49,115 - INFO - Apple___Black_rot                                  | Count:   385 | Weight: 1.78
+2025-04-16 09:56:49,116 - INFO - Apple___Cedar_apple_rust                           | Count:   171 | Weight: 4.02
+2025-04-16 09:56:49,116 - INFO - Apple___healthy                                    | Count:  1033 | Weight: 0.67
+2025-04-16 09:56:49,116 - INFO - Blueberry___healthy                                | Count:   958 | Weight: 0.72
+2025-04-16 09:56:49,116 - INFO - Cherry_(including_sour)___Powdery_mildew           | Count:   661 | Weight: 1.04
+2025-04-16 09:56:49,117 - INFO - Cherry_(including_sour)___healthy                  | Count:   553 | Weight: 1.24
+2025-04-16 09:56:49,117 - INFO - Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot | Count:   316 | Weight: 2.17
+2025-04-16 09:56:49,118 - INFO - Corn_(maize)___Common_rust_                        | Count:   756 | Weight: 0.91
+2025-04-16 09:56:49,119 - INFO - Corn_(maize)___Northern_Leaf_Blight                | Count:   628 | Weight: 1.09
+2025-04-16 09:56:49,119 - INFO - Corn_(maize)___healthy                             | Count:   742 | Weight: 0.93
+2025-04-16 09:56:49,119 - INFO - Grape___Black_rot                                  | Count:   761 | Weight: 0.90
+2025-04-16 09:56:49,119 - INFO - Grape___Esca_(Black_Measles)                       | Count:   885 | Weight: 0.78
+2025-04-16 09:56:49,119 - INFO - Grape___Leaf_blight_(Isariopsis_Leaf_Spot)         | Count:   687 | Weight: 1.00
+2025-04-16 09:56:49,119 - INFO - Grape___healthy                                    | Count:   259 | Weight: 2.65
+2025-04-16 09:56:49,119 - INFO - Orange___Haunglongbing_(Citrus_greening)           | Count:  3550 | Weight: 0.20
+2025-04-16 09:56:49,119 - INFO - Peach___Bacterial_spot                             | Count:  1488 | Weight: 0.46
+2025-04-16 09:56:49,119 - INFO - Peach___healthy                                    | Count:   229 | Weight: 3.00
+2025-04-16 09:56:49,119 - INFO - Pepper,_bell___Bacterial_spot                      | Count:   640 | Weight: 1.07
+2025-04-16 09:56:49,119 - INFO - Pepper,_bell___healthy                             | Count:   951 | Weight: 0.72
+2025-04-16 09:56:49,119 - INFO - Potato___Early_blight                              | Count:   633 | Weight: 1.09
+2025-04-16 09:56:49,119 - INFO - Potato___Late_blight                               | Count:   643 | Weight: 1.07
+2025-04-16 09:56:49,119 - INFO - Potato___healthy                                   | Count:    92 | Weight: 10.00
+2025-04-16 09:56:49,119 - INFO - Raspberry___healthy                                | Count:   237 | Weight: 2.90
+2025-04-16 09:56:49,119 - INFO - Soybean___healthy                                  | Count:  3239 | Weight: 0.21
+2025-04-16 09:56:49,119 - INFO - Squash___Powdery_mildew                            | Count:  1189 | Weight: 0.58
+2025-04-16 09:56:49,119 - INFO - Strawberry___Leaf_scorch                           | Count:   736 | Weight: 0.93
+2025-04-16 09:56:49,119 - INFO - Strawberry___healthy                               | Count:   280 | Weight: 2.45
+2025-04-16 09:56:49,119 - INFO - Tomato___Bacterial_spot                            | Count:  1337 | Weight: 0.51
+2025-04-16 09:56:49,119 - INFO - Tomato___Early_blight                              | Count:   627 | Weight: 1.10
+2025-04-16 09:56:49,119 - INFO - Tomato___Late_blight                               | Count:  1231 | Weight: 0.56
+2025-04-16 09:56:49,119 - INFO - Tomato___Leaf_Mold                                 | Count:   628 | Weight: 1.09
+2025-04-16 09:56:49,119 - INFO - Tomato___Septoria_leaf_spot                        | Count:  1156 | Weight: 0.59
+2025-04-16 09:56:49,119 - INFO - Tomato___Spider_mites Two-spotted_spider_mite      | Count:  1075 | Weight: 0.64
+2025-04-16 09:56:49,119 - INFO - Tomato___Target_Spot                               | Count:   869 | Weight: 0.79
+2025-04-16 09:56:49,119 - INFO - Tomato___Tomato_Yellow_Leaf_Curl_Virus             | Count:  3452 | Weight: 0.20
+2025-04-16 09:56:49,119 - INFO - Tomato___Tomato_mosaic_virus                       | Count:   246 | Weight: 2.79
+2025-04-16 09:56:49,119 - INFO - Tomato___healthy                                   | Count:  1021 | Weight: 0.67
+2025-04-16 09:56:49,119 - INFO - 
+⚙️ Training Configuration:
+2025-04-16 09:56:49,119 - INFO - - Optimizer: AdamW
+2025-04-16 09:56:49,119 - INFO - - Initial LR: 0.001
+2025-04-16 09:56:49,119 - INFO - - Batch Size: 64
+2025-04-16 09:56:49,119 - INFO - - Epochs: 20
+2025-04-16 09:56:49,119 - INFO - - Class weights: [ 1.6715329   1.7844156   4.017544    0.66505325  0.717119    1.0393343
+  1.2423147   2.1740506   0.90873015  1.0939491   0.925876    0.90275955
+  0.77627116  1.          2.6525097   0.2         0.46169356  3.
+  1.0734375   0.72239745  1.0853081   1.0684292  10.          2.898734
+  0.2121025   0.57779646  0.93342394  2.4535713   0.5138369   1.0956938
+  0.5580829   1.0939491   0.5942907   0.6390698   0.7905639   0.2
+  2.792683    0.67286974]
+2025-04-16 09:56:50,019 - WARNING -  * Debugger is active!
+2025-04-16 09:56:50,036 - INFO -  * Debugger PIN: 132-062-278
+2025-04-16 09:56:51,036 - INFO - 127.0.0.1 - - [16/Apr/2025 09:56:51] "GET /health HTTP/1.1" 200 -
+2025-04-16 09:56:51,320 - INFO - 127.0.0.1 - - [16/Apr/2025 09:56:51] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-16 09:59:06,925 - INFO -  * Detected change in 'C:\\plant_village\\predict.py', reloading
