@@ -1,0 +1,429 @@
+2025-05-07 08:01:36,340 - INFO - 🚀 Starting training pipeline
+2025-05-07 08:01:36,340 - INFO - Initializing CUDA...
+2025-05-07 08:01:36,551 - INFO - CUDA initialized in 0.21s
+2025-05-07 08:01:36,552 - INFO - Using GPU: NVIDIA GeForce GTX 1050 Ti
+2025-05-07 08:01:36,552 - INFO - Setting up data transformations...
+2025-05-07 08:01:36,553 - INFO - Loading datasets from ./PlantVillage/train and ./PlantVillage/val...
+2025-05-07 08:01:40,716 - INFO - Training set loaded with 43444 images
+2025-05-07 08:01:40,716 - INFO - Validation set loaded with 10861 images
+2025-05-07 08:01:40,732 - INFO - Final splits - Train: 43444, Val: 8688, Test: 2173
+2025-05-07 08:01:40,732 - INFO - 
+Found 38 classes:
+['Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy', 'Blueberry___healthy', 'Cherry_(including_sour)___Powdery_mildew', 'Cherry_(including_sour)___healthy', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot', 'Corn_(maize)___Common_rust_', 'Corn_(maize)___Northern_Leaf_Blight', 'Corn_(maize)___healthy', 'Grape___Black_rot', 'Grape___Esca_(Black_Measles)', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 'Grape___healthy', 'Orange___Haunglongbing_(Citrus_greening)', 'Peach___Bacterial_spot', 'Peach___healthy', 'Pepper,_bell___Bacterial_spot', 'Pepper,_bell___healthy', 'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy', 'Raspberry___healthy', 'Soybean___healthy', 'Squash___Powdery_mildew', 'Strawberry___Leaf_scorch', 'Strawberry___healthy', 'Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy']
+
+2025-05-07 08:01:40,732 - INFO - Initializing model...
+2025-05-07 08:01:41,219 - INFO - Model architecture:
+PlantDiseaseCNN(
+  (features): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (4): Dropout(p=0.2, inplace=False)
+    (5): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (6): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (7): ReLU()
+    (8): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (9): Dropout(p=0.3, inplace=False)
+    (10): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (11): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (12): ReLU()
+    (13): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (14): Dropout(p=0.4, inplace=False)
+  )
+  (classifier): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=100352, out_features=512, bias=True)
+    (2): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (3): ReLU()
+    (4): Dropout(p=0.5, inplace=False)
+    (5): Linear(in_features=512, out_features=38, bias=True)
+  )
+)
+2025-05-07 08:01:41,219 - INFO - Calculating class weights with optimized balancing...
+2025-05-07 08:01:41,508 - INFO - 
+📊 Class Distribution and Optimized Weights:
+2025-05-07 08:01:41,508 - INFO - Apple___Apple_scab                                 | Count:   504 | Weight: 1.71
+2025-05-07 08:01:41,508 - INFO - Apple___Black_rot                                  | Count:   496 | Weight: 1.74
+2025-05-07 08:01:41,508 - INFO - Apple___Cedar_apple_rust                           | Count:   220 | Weight: 3.91
+2025-05-07 08:01:41,508 - INFO - Apple___healthy                                    | Count:  1316 | Weight: 0.65
+2025-05-07 08:01:41,508 - INFO - Blueberry___healthy                                | Count:  1202 | Weight: 0.72
+2025-05-07 08:01:41,508 - INFO - Cherry_(including_sour)___Powdery_mildew           | Count:   842 | Weight: 1.02
+2025-05-07 08:01:41,508 - INFO - Cherry_(including_sour)___healthy                  | Count:   684 | Weight: 1.26
+2025-05-07 08:01:41,508 - INFO - Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot | Count:   410 | Weight: 2.10
+2025-05-07 08:01:41,508 - INFO - Corn_(maize)___Common_rust_                        | Count:   953 | Weight: 0.90
+2025-05-07 08:01:41,508 - INFO - Corn_(maize)___Northern_Leaf_Blight                | Count:   788 | Weight: 1.09
+2025-05-07 08:01:41,508 - INFO - Corn_(maize)___healthy                             | Count:   929 | Weight: 0.93
+2025-05-07 08:01:41,508 - INFO - Grape___Black_rot                                  | Count:   944 | Weight: 0.91
+2025-05-07 08:01:41,508 - INFO - Grape___Esca_(Black_Measles)                       | Count:  1107 | Weight: 0.78
+2025-05-07 08:01:41,508 - INFO - Grape___Leaf_blight_(Isariopsis_Leaf_Spot)         | Count:   861 | Weight: 1.00
+2025-05-07 08:01:41,508 - INFO - Grape___healthy                                    | Count:   339 | Weight: 2.54
+2025-05-07 08:01:41,508 - INFO - Orange___Haunglongbing_(Citrus_greening)           | Count:  4405 | Weight: 0.20
+2025-05-07 08:01:41,508 - INFO - Peach___Bacterial_spot                             | Count:  1838 | Weight: 0.47
+2025-05-07 08:01:41,508 - INFO - Peach___healthy                                    | Count:   288 | Weight: 2.99
+2025-05-07 08:01:41,508 - INFO - Pepper,_bell___Bacterial_spot                      | Count:   797 | Weight: 1.08
+2025-05-07 08:01:41,524 - INFO - Pepper,_bell___healthy                             | Count:  1183 | Weight: 0.73
+2025-05-07 08:01:41,524 - INFO - Potato___Early_blight                              | Count:   800 | Weight: 1.08
+2025-05-07 08:01:41,524 - INFO - Potato___Late_blight                               | Count:   800 | Weight: 1.08
+2025-05-07 08:01:41,524 - INFO - Potato___healthy                                   | Count:   121 | Weight: 7.12
+2025-05-07 08:01:41,524 - INFO - Raspberry___healthy                                | Count:   297 | Weight: 2.90
+2025-05-07 08:01:41,524 - INFO - Soybean___healthy                                  | Count:  4072 | Weight: 0.21
+2025-05-07 08:01:41,524 - INFO - Squash___Powdery_mildew                            | Count:  1468 | Weight: 0.59
+2025-05-07 08:01:41,524 - INFO - Strawberry___Leaf_scorch                           | Count:   887 | Weight: 0.97
+2025-05-07 08:01:41,524 - INFO - Strawberry___healthy                               | Count:   364 | Weight: 2.37
+2025-05-07 08:01:41,524 - INFO - Tomato___Bacterial_spot                            | Count:  1702 | Weight: 0.51
+2025-05-07 08:01:41,524 - INFO - Tomato___Early_blight                              | Count:   800 | Weight: 1.08
+2025-05-07 08:01:41,524 - INFO - Tomato___Late_blight                               | Count:  1527 | Weight: 0.56
+2025-05-07 08:01:41,524 - INFO - Tomato___Leaf_Mold                                 | Count:   761 | Weight: 1.13
+2025-05-07 08:01:41,524 - INFO - Tomato___Septoria_leaf_spot                        | Count:  1417 | Weight: 0.61
+2025-05-07 08:01:41,524 - INFO - Tomato___Spider_mites Two-spotted_spider_mite      | Count:  1341 | Weight: 0.64
+2025-05-07 08:01:41,524 - INFO - Tomato___Target_Spot                               | Count:  1123 | Weight: 0.77
+2025-05-07 08:01:41,524 - INFO - Tomato___Tomato_Yellow_Leaf_Curl_Virus             | Count:  4286 | Weight: 0.20
+2025-05-07 08:01:41,524 - INFO - Tomato___Tomato_mosaic_virus                       | Count:   299 | Weight: 2.88
+2025-05-07 08:01:41,524 - INFO - Tomato___healthy                                   | Count:  1273 | Weight: 0.68
+2025-05-07 08:01:41,524 - INFO - 
+⚙️ Training Configuration:
+2025-05-07 08:01:41,524 - INFO - - Optimizer: AdamW
+2025-05-07 08:01:41,524 - INFO - - Initial LR: 0.0005
+2025-05-07 08:01:41,524 - INFO - - Batch Size: 32
+2025-05-07 08:01:41,524 - INFO - - Epochs: 20
+2025-05-07 08:01:41,524 - INFO - - Class weights: [1.7083334  1.735887   3.9136364  0.65425533 0.71630615 1.0225654
+ 1.2587719  2.1        0.90346277 1.0926396  0.926803   0.9120763
+ 0.7777778  1.         2.539823   0.2        0.46844396 2.9895833
+ 1.0803012  0.7278106  1.07625    1.07625    7.1157026  2.89899
+ 0.211444   0.58651227 0.9706877  2.3653846  0.50587547 1.07625
+ 0.5638507  1.1314061  0.6076217  0.6420582  0.76669633 0.2008866
+ 2.8795986  0.67635506]
+2025-05-07 08:01:41,539 - INFO - 
+🏁 Epoch 1/60 started
+2025-05-07 08:07:08,620 - INFO - 💾 New best model saved with val acc: 47.24%
+2025-05-07 08:07:08,620 - INFO - ✅ Epoch 1 completed in 327.08s
+2025-05-07 08:07:08,620 - INFO - 📊 Train Loss: 1.2032 | Acc: 34.40%
+2025-05-07 08:07:08,620 - INFO - 📈 Val Acc: 47.24% | Best Val Acc: 47.24%
+2025-05-07 08:07:08,620 - INFO - 
+🏁 Epoch 2/60 started
+2025-05-07 08:12:39,652 - INFO - 💾 New best model saved with val acc: 57.38%
+2025-05-07 08:12:39,654 - INFO - ✅ Epoch 2 completed in 331.03s
+2025-05-07 08:12:39,654 - INFO - 📊 Train Loss: 0.8847 | Acc: 48.74%
+2025-05-07 08:12:39,654 - INFO - 📈 Val Acc: 57.38% | Best Val Acc: 57.38%
+2025-05-07 08:12:39,654 - INFO - 
+🏁 Epoch 3/60 started
+2025-05-07 08:17:50,455 - INFO - ✅ Epoch 3 completed in 310.80s
+2025-05-07 08:17:50,455 - INFO - 📊 Train Loss: 0.7339 | Acc: 55.86%
+2025-05-07 08:17:50,456 - INFO - 📈 Val Acc: 56.81% | Best Val Acc: 57.38%
+2025-05-07 08:17:50,456 - INFO - 
+🏁 Epoch 4/60 started
+2025-05-07 08:23:21,205 - INFO - 💾 New best model saved with val acc: 60.46%
+2025-05-07 08:23:21,206 - INFO - ✅ Epoch 4 completed in 330.75s
+2025-05-07 08:23:21,206 - INFO - 📊 Train Loss: 0.6343 | Acc: 61.14%
+2025-05-07 08:23:21,206 - INFO - 📈 Val Acc: 60.46% | Best Val Acc: 60.46%
+2025-05-07 08:23:21,208 - INFO - 
+🏁 Epoch 5/60 started
+2025-05-07 08:28:45,819 - INFO - ✅ Epoch 5 completed in 324.61s
+2025-05-07 08:28:45,820 - INFO - 📊 Train Loss: 0.5741 | Acc: 64.17%
+2025-05-07 08:28:45,820 - INFO - 📈 Val Acc: 60.03% | Best Val Acc: 60.46%
+2025-05-07 08:28:45,821 - INFO - 
+🏁 Epoch 6/60 started
+2025-05-07 08:34:07,460 - INFO - 💾 New best model saved with val acc: 66.07%
+2025-05-07 08:34:07,460 - INFO - ✅ Epoch 6 completed in 321.64s
+2025-05-07 08:34:07,461 - INFO - 📊 Train Loss: 0.5173 | Acc: 67.66%
+2025-05-07 08:34:07,461 - INFO - 📈 Val Acc: 66.07% | Best Val Acc: 66.07%
+2025-05-07 08:34:07,461 - INFO - 
+🏁 Epoch 7/60 started
+2025-05-07 08:39:41,498 - INFO - ✅ Epoch 7 completed in 334.04s
+2025-05-07 08:39:41,499 - INFO - 📊 Train Loss: 0.4873 | Acc: 69.34%
+2025-05-07 08:39:41,499 - INFO - 📈 Val Acc: 62.91% | Best Val Acc: 66.07%
+2025-05-07 08:39:41,499 - INFO - 
+🏁 Epoch 8/60 started
+2025-05-07 08:45:20,623 - INFO - 💾 New best model saved with val acc: 71.29%
+2025-05-07 08:45:20,623 - INFO - ✅ Epoch 8 completed in 339.12s
+2025-05-07 08:45:20,624 - INFO - 📊 Train Loss: 0.4597 | Acc: 70.89%
+2025-05-07 08:45:20,624 - INFO - 📈 Val Acc: 71.29% | Best Val Acc: 71.29%
+2025-05-07 08:45:20,624 - INFO - 
+🏁 Epoch 9/60 started
+2025-05-07 08:51:01,997 - INFO - 💾 New best model saved with val acc: 72.97%
+2025-05-07 08:51:01,998 - INFO - ✅ Epoch 9 completed in 341.37s
+2025-05-07 08:51:01,999 - INFO - 📊 Train Loss: 0.4310 | Acc: 72.38%
+2025-05-07 08:51:01,999 - INFO - 📈 Val Acc: 72.97% | Best Val Acc: 72.97%
+2025-05-07 08:51:01,999 - INFO - 
+🏁 Epoch 10/60 started
+2025-05-07 08:56:42,102 - INFO - 💾 New best model saved with val acc: 73.48%
+2025-05-07 08:56:42,106 - INFO - ✅ Epoch 10 completed in 340.11s
+2025-05-07 08:56:42,106 - INFO - 📊 Train Loss: 0.4172 | Acc: 73.60%
+2025-05-07 08:56:42,106 - INFO - 📈 Val Acc: 73.48% | Best Val Acc: 73.48%
+2025-05-07 08:56:42,106 - INFO - 
+🏁 Epoch 11/60 started
+2025-05-07 09:02:15,409 - INFO - 💾 New best model saved with val acc: 79.49%
+2025-05-07 09:02:15,409 - INFO - ✅ Epoch 11 completed in 333.30s
+2025-05-07 09:02:15,410 - INFO - 📊 Train Loss: 0.3903 | Acc: 74.87%
+2025-05-07 09:02:15,410 - INFO - 📈 Val Acc: 79.49% | Best Val Acc: 79.49%
+2025-05-07 09:02:15,411 - INFO - 
+🏁 Epoch 12/60 started
+2025-05-07 09:07:29,442 - INFO - ✅ Epoch 12 completed in 314.03s
+2025-05-07 09:07:29,448 - INFO - 📊 Train Loss: 0.3757 | Acc: 75.98%
+2025-05-07 09:07:29,452 - INFO - 📈 Val Acc: 78.43% | Best Val Acc: 79.49%
+2025-05-07 09:07:29,454 - INFO - 
+🏁 Epoch 13/60 started
+2025-05-07 09:12:46,517 - INFO - ✅ Epoch 13 completed in 317.06s
+2025-05-07 09:12:46,518 - INFO - 📊 Train Loss: 0.3656 | Acc: 76.42%
+2025-05-07 09:12:46,518 - INFO - 📈 Val Acc: 76.75% | Best Val Acc: 79.49%
+2025-05-07 09:12:46,519 - INFO - 
+🏁 Epoch 14/60 started
+2025-05-07 09:18:34,844 - INFO - 💾 New best model saved with val acc: 83.58%
+2025-05-07 09:18:34,879 - INFO - ✅ Epoch 14 completed in 348.36s
+2025-05-07 09:18:34,889 - INFO - 📊 Train Loss: 0.3493 | Acc: 77.41%
+2025-05-07 09:18:34,889 - INFO - 📈 Val Acc: 83.58% | Best Val Acc: 83.58%
+2025-05-07 09:18:34,889 - INFO - 
+🏁 Epoch 15/60 started
+2025-05-07 09:24:15,383 - INFO - ✅ Epoch 15 completed in 340.49s
+2025-05-07 09:24:15,384 - INFO - 📊 Train Loss: 0.3371 | Acc: 78.40%
+2025-05-07 09:24:15,384 - INFO - 📈 Val Acc: 81.79% | Best Val Acc: 83.58%
+2025-05-07 09:24:15,385 - INFO - 
+🏁 Epoch 16/60 started
+2025-05-07 09:29:49,302 - INFO - ✅ Epoch 16 completed in 333.92s
+2025-05-07 09:29:49,303 - INFO - 📊 Train Loss: 0.3206 | Acc: 79.25%
+2025-05-07 09:29:49,303 - INFO - 📈 Val Acc: 80.67% | Best Val Acc: 83.58%
+2025-05-07 09:29:49,304 - INFO - 
+🏁 Epoch 17/60 started
+2025-05-07 09:34:54,928 - INFO - 💾 New best model saved with val acc: 85.92%
+2025-05-07 09:34:54,929 - INFO - ✅ Epoch 17 completed in 305.63s
+2025-05-07 09:34:54,929 - INFO - 📊 Train Loss: 0.3233 | Acc: 79.27%
+2025-05-07 09:34:54,930 - INFO - 📈 Val Acc: 85.92% | Best Val Acc: 85.92%
+2025-05-07 09:34:54,930 - INFO - 
+🏁 Epoch 18/60 started
+2025-05-07 09:39:56,774 - INFO - ✅ Epoch 18 completed in 301.84s
+2025-05-07 09:39:56,774 - INFO - 📊 Train Loss: 0.3054 | Acc: 80.24%
+2025-05-07 09:39:56,775 - INFO - 📈 Val Acc: 85.50% | Best Val Acc: 85.92%
+2025-05-07 09:39:56,775 - INFO - 
+🏁 Epoch 19/60 started
+2025-05-07 09:44:57,530 - INFO - ✅ Epoch 19 completed in 300.76s
+2025-05-07 09:44:57,531 - INFO - 📊 Train Loss: 0.2940 | Acc: 80.98%
+2025-05-07 09:44:57,531 - INFO - 📈 Val Acc: 79.02% | Best Val Acc: 85.92%
+2025-05-07 09:44:57,532 - INFO - 
+🏁 Epoch 20/60 started
+2025-05-07 09:50:03,666 - INFO - 💾 New best model saved with val acc: 87.74%
+2025-05-07 09:50:03,667 - INFO - ✅ Epoch 20 completed in 306.13s
+2025-05-07 09:50:03,668 - INFO - 📊 Train Loss: 0.2887 | Acc: 81.38%
+2025-05-07 09:50:03,668 - INFO - 📈 Val Acc: 87.74% | Best Val Acc: 87.74%
+2025-05-07 09:50:03,668 - INFO - 
+🏁 Epoch 21/60 started
+2025-05-07 09:55:19,923 - INFO - ✅ Epoch 21 completed in 316.25s
+2025-05-07 09:55:19,924 - INFO - 📊 Train Loss: 0.2791 | Acc: 81.62%
+2025-05-07 09:55:19,924 - INFO - 📈 Val Acc: 83.07% | Best Val Acc: 87.74%
+2025-05-07 09:55:19,925 - INFO - 
+🏁 Epoch 22/60 started
+2025-05-07 10:00:29,986 - INFO - 💾 New best model saved with val acc: 88.14%
+2025-05-07 10:00:29,986 - INFO - ✅ Epoch 22 completed in 310.06s
+2025-05-07 10:00:29,987 - INFO - 📊 Train Loss: 0.2677 | Acc: 82.28%
+2025-05-07 10:00:29,987 - INFO - 📈 Val Acc: 88.14% | Best Val Acc: 88.14%
+2025-05-07 10:00:29,988 - INFO - 
+🏁 Epoch 23/60 started
+2025-05-07 10:05:50,064 - INFO - 💾 New best model saved with val acc: 89.89%
+2025-05-07 10:05:50,066 - INFO - ✅ Epoch 23 completed in 320.08s
+2025-05-07 10:05:50,066 - INFO - 📊 Train Loss: 0.2587 | Acc: 83.11%
+2025-05-07 10:05:50,066 - INFO - 📈 Val Acc: 89.89% | Best Val Acc: 89.89%
+2025-05-07 10:05:50,067 - INFO - 
+🏁 Epoch 24/60 started
+2025-05-07 10:10:59,775 - INFO - 💾 New best model saved with val acc: 90.73%
+2025-05-07 10:10:59,776 - INFO - ✅ Epoch 24 completed in 309.71s
+2025-05-07 10:10:59,777 - INFO - 📊 Train Loss: 0.2602 | Acc: 82.97%
+2025-05-07 10:10:59,781 - INFO - 📈 Val Acc: 90.73% | Best Val Acc: 90.73%
+2025-05-07 10:10:59,781 - INFO - 
+🏁 Epoch 25/60 started
+2025-05-07 10:16:07,776 - INFO - ✅ Epoch 25 completed in 307.99s
+2025-05-07 10:16:07,777 - INFO - 📊 Train Loss: 0.2551 | Acc: 83.35%
+2025-05-07 10:16:07,777 - INFO - 📈 Val Acc: 86.87% | Best Val Acc: 90.73%
+2025-05-07 10:16:07,777 - INFO - 
+🏁 Epoch 26/60 started
+2025-05-07 10:21:13,945 - INFO - ✅ Epoch 26 completed in 306.17s
+2025-05-07 10:21:13,946 - INFO - 📊 Train Loss: 0.2462 | Acc: 83.87%
+2025-05-07 10:21:13,946 - INFO - 📈 Val Acc: 88.56% | Best Val Acc: 90.73%
+2025-05-07 10:21:13,947 - INFO - 
+🏁 Epoch 27/60 started
+2025-05-07 10:26:26,973 - INFO - ✅ Epoch 27 completed in 313.03s
+2025-05-07 10:26:26,974 - INFO - 📊 Train Loss: 0.2408 | Acc: 84.22%
+2025-05-07 10:26:26,974 - INFO - 📈 Val Acc: 88.92% | Best Val Acc: 90.73%
+2025-05-07 10:26:26,975 - INFO - 
+🏁 Epoch 28/60 started
+2025-05-07 10:32:16,791 - INFO - ✅ Epoch 28 completed in 349.82s
+2025-05-07 10:32:16,792 - INFO - 📊 Train Loss: 0.2174 | Acc: 85.57%
+2025-05-07 10:32:16,792 - INFO - 📈 Val Acc: 90.14% | Best Val Acc: 90.73%
+2025-05-07 10:32:16,792 - INFO - 
+🏁 Epoch 29/60 started
+2025-05-07 10:37:50,782 - INFO - 💾 New best model saved with val acc: 91.17%
+2025-05-07 10:37:50,784 - INFO - ✅ Epoch 29 completed in 333.99s
+2025-05-07 10:37:50,785 - INFO - 📊 Train Loss: 0.2054 | Acc: 86.23%
+2025-05-07 10:37:50,785 - INFO - 📈 Val Acc: 91.17% | Best Val Acc: 91.17%
+2025-05-07 10:37:50,786 - INFO - 
+🏁 Epoch 30/60 started
+2025-05-07 10:43:05,325 - INFO - ✅ Epoch 30 completed in 314.54s
+2025-05-07 10:43:05,325 - INFO - 📊 Train Loss: 0.2078 | Acc: 86.43%
+2025-05-07 10:43:05,325 - INFO - 📈 Val Acc: 91.05% | Best Val Acc: 91.17%
+2025-05-07 10:43:05,341 - INFO - 
+🏁 Epoch 31/60 started
+2025-05-07 10:48:17,692 - INFO - ✅ Epoch 31 completed in 312.35s
+2025-05-07 10:48:17,693 - INFO - 📊 Train Loss: 0.1999 | Acc: 86.86%
+2025-05-07 10:48:17,694 - INFO - 📈 Val Acc: 90.02% | Best Val Acc: 91.17%
+2025-05-07 10:48:17,694 - INFO - 
+🏁 Epoch 32/60 started
+2025-05-07 10:53:41,943 - INFO - 💾 New best model saved with val acc: 91.53%
+2025-05-07 10:53:41,943 - INFO - ✅ Epoch 32 completed in 324.25s
+2025-05-07 10:53:41,946 - INFO - 📊 Train Loss: 0.1908 | Acc: 87.17%
+2025-05-07 10:53:41,946 - INFO - 📈 Val Acc: 91.53% | Best Val Acc: 91.53%
+2025-05-07 10:53:41,946 - INFO - 
+🏁 Epoch 33/60 started
+2025-05-07 10:59:13,181 - INFO - 💾 New best model saved with val acc: 92.03%
+2025-05-07 10:59:13,186 - INFO - ✅ Epoch 33 completed in 331.24s
+2025-05-07 10:59:13,191 - INFO - 📊 Train Loss: 0.1955 | Acc: 86.96%
+2025-05-07 10:59:13,196 - INFO - 📈 Val Acc: 92.03% | Best Val Acc: 92.03%
+2025-05-07 10:59:13,196 - INFO - 
+🏁 Epoch 34/60 started
+2025-05-07 11:05:12,976 - INFO - ✅ Epoch 34 completed in 359.78s
+2025-05-07 11:05:12,977 - INFO - 📊 Train Loss: 0.1841 | Acc: 87.84%
+2025-05-07 11:05:12,978 - INFO - 📈 Val Acc: 91.59% | Best Val Acc: 92.03%
+2025-05-07 11:05:12,979 - INFO - 
+🏁 Epoch 35/60 started
+2025-05-07 11:10:45,355 - INFO - 💾 New best model saved with val acc: 92.71%
+2025-05-07 11:10:45,355 - INFO - ✅ Epoch 35 completed in 332.38s
+2025-05-07 11:10:45,355 - INFO - 📊 Train Loss: 0.1839 | Acc: 87.75%
+2025-05-07 11:10:45,355 - INFO - 📈 Val Acc: 92.71% | Best Val Acc: 92.71%
+2025-05-07 11:10:45,355 - INFO - 
+🏁 Epoch 36/60 started
+2025-05-07 11:16:29,189 - INFO - ✅ Epoch 36 completed in 343.83s
+2025-05-07 11:16:29,192 - INFO - 📊 Train Loss: 0.1818 | Acc: 87.97%
+2025-05-07 11:16:29,193 - INFO - 📈 Val Acc: 92.06% | Best Val Acc: 92.71%
+2025-05-07 11:16:29,193 - INFO - 
+🏁 Epoch 37/60 started
+2025-05-07 11:22:05,198 - INFO - 💾 New best model saved with val acc: 92.84%
+2025-05-07 11:22:05,198 - INFO - ✅ Epoch 37 completed in 336.00s
+2025-05-07 11:22:05,198 - INFO - 📊 Train Loss: 0.1822 | Acc: 87.79%
+2025-05-07 11:22:05,198 - INFO - 📈 Val Acc: 92.84% | Best Val Acc: 92.84%
+2025-05-07 11:22:05,198 - INFO - 
+🏁 Epoch 38/60 started
+2025-05-07 11:27:12,324 - INFO - 💾 New best model saved with val acc: 92.90%
+2025-05-07 11:27:12,324 - INFO - ✅ Epoch 38 completed in 307.13s
+2025-05-07 11:27:12,324 - INFO - 📊 Train Loss: 0.1789 | Acc: 88.14%
+2025-05-07 11:27:12,324 - INFO - 📈 Val Acc: 92.90% | Best Val Acc: 92.90%
+2025-05-07 11:27:12,324 - INFO - 
+🏁 Epoch 39/60 started
+2025-05-07 11:32:16,150 - INFO - 💾 New best model saved with val acc: 93.63%
+2025-05-07 11:32:16,150 - INFO - ✅ Epoch 39 completed in 303.83s
+2025-05-07 11:32:16,150 - INFO - 📊 Train Loss: 0.1772 | Acc: 88.21%
+2025-05-07 11:32:16,150 - INFO - 📈 Val Acc: 93.63% | Best Val Acc: 93.63%
+2025-05-07 11:32:16,150 - INFO - 
+🏁 Epoch 40/60 started
+2025-05-07 11:37:14,943 - INFO - ✅ Epoch 40 completed in 298.79s
+2025-05-07 11:37:14,943 - INFO - 📊 Train Loss: 0.1755 | Acc: 88.37%
+2025-05-07 11:37:14,943 - INFO - 📈 Val Acc: 92.79% | Best Val Acc: 93.63%
+2025-05-07 11:37:14,943 - INFO - 
+🏁 Epoch 41/60 started
+2025-05-07 11:42:12,298 - INFO - ✅ Epoch 41 completed in 297.36s
+2025-05-07 11:42:12,298 - INFO - 📊 Train Loss: 0.1731 | Acc: 88.39%
+2025-05-07 11:42:12,314 - INFO - 📈 Val Acc: 93.63% | Best Val Acc: 93.63%
+2025-05-07 11:42:12,314 - INFO - 
+🏁 Epoch 42/60 started
+2025-05-07 11:47:25,863 - INFO - ✅ Epoch 42 completed in 313.55s
+2025-05-07 11:47:25,863 - INFO - 📊 Train Loss: 0.1699 | Acc: 88.50%
+2025-05-07 11:47:25,863 - INFO - 📈 Val Acc: 92.97% | Best Val Acc: 93.63%
+2025-05-07 11:47:25,864 - INFO - 
+🏁 Epoch 43/60 started
+2025-05-07 11:52:40,939 - INFO - ✅ Epoch 43 completed in 315.07s
+2025-05-07 11:52:40,939 - INFO - 📊 Train Loss: 0.1613 | Acc: 89.04%
+2025-05-07 11:52:40,940 - INFO - 📈 Val Acc: 93.14% | Best Val Acc: 93.63%
+2025-05-07 11:52:40,940 - INFO - 
+🏁 Epoch 44/60 started
+2025-05-07 11:58:14,375 - INFO - ✅ Epoch 44 completed in 333.43s
+2025-05-07 11:58:14,375 - INFO - 📊 Train Loss: 0.1540 | Acc: 89.66%
+2025-05-07 11:58:14,376 - INFO - 📈 Val Acc: 93.27% | Best Val Acc: 93.63%
+2025-05-07 11:58:14,377 - INFO - 
+🏁 Epoch 45/60 started
+2025-05-07 12:03:38,303 - INFO - 💾 New best model saved with val acc: 93.77%
+2025-05-07 12:03:38,303 - INFO - ✅ Epoch 45 completed in 323.93s
+2025-05-07 12:03:38,303 - INFO - 📊 Train Loss: 0.1551 | Acc: 89.59%
+2025-05-07 12:03:38,304 - INFO - 📈 Val Acc: 93.77% | Best Val Acc: 93.77%
+2025-05-07 12:03:38,304 - INFO - 
+🏁 Epoch 46/60 started
+2025-05-07 12:09:12,690 - INFO - 💾 New best model saved with val acc: 94.13%
+2025-05-07 12:09:12,692 - INFO - ✅ Epoch 46 completed in 334.39s
+2025-05-07 12:09:12,692 - INFO - 📊 Train Loss: 0.1503 | Acc: 89.82%
+2025-05-07 12:09:12,701 - INFO - 📈 Val Acc: 94.13% | Best Val Acc: 94.13%
+2025-05-07 12:09:12,706 - INFO - 
+🏁 Epoch 47/60 started
+2025-05-07 12:14:43,143 - INFO - ✅ Epoch 47 completed in 330.44s
+2025-05-07 12:14:43,144 - INFO - 📊 Train Loss: 0.1512 | Acc: 89.60%
+2025-05-07 12:14:43,144 - INFO - 📈 Val Acc: 93.87% | Best Val Acc: 94.13%
+2025-05-07 12:14:43,144 - INFO - 
+🏁 Epoch 48/60 started
+2025-05-07 12:20:14,861 - INFO - 💾 New best model saved with val acc: 94.29%
+2025-05-07 12:20:14,862 - INFO - ✅ Epoch 48 completed in 331.72s
+2025-05-07 12:20:14,862 - INFO - 📊 Train Loss: 0.1484 | Acc: 90.12%
+2025-05-07 12:20:14,863 - INFO - 📈 Val Acc: 94.29% | Best Val Acc: 94.29%
+2025-05-07 12:20:14,863 - INFO - 
+🏁 Epoch 49/60 started
+2025-05-07 12:25:16,843 - INFO - ✅ Epoch 49 completed in 301.98s
+2025-05-07 12:25:16,844 - INFO - 📊 Train Loss: 0.1479 | Acc: 89.98%
+2025-05-07 12:25:16,844 - INFO - 📈 Val Acc: 93.68% | Best Val Acc: 94.29%
+2025-05-07 12:25:16,844 - INFO - 
+🏁 Epoch 50/60 started
+2025-05-07 12:30:19,194 - INFO - ✅ Epoch 50 completed in 302.35s
+2025-05-07 12:30:19,195 - INFO - 📊 Train Loss: 0.1500 | Acc: 90.03%
+2025-05-07 12:30:19,195 - INFO - 📈 Val Acc: 94.24% | Best Val Acc: 94.29%
+2025-05-07 12:30:19,196 - INFO - 
+🏁 Epoch 51/60 started
+2025-05-07 12:35:22,114 - INFO - ✅ Epoch 51 completed in 302.92s
+2025-05-07 12:35:22,114 - INFO - 📊 Train Loss: 0.1473 | Acc: 89.98%
+2025-05-07 12:35:22,115 - INFO - 📈 Val Acc: 93.96% | Best Val Acc: 94.29%
+2025-05-07 12:35:22,115 - INFO - 
+🏁 Epoch 52/60 started
+2025-05-07 12:40:28,920 - INFO - 💾 New best model saved with val acc: 95.03%
+2025-05-07 12:40:28,921 - INFO - ✅ Epoch 52 completed in 306.81s
+2025-05-07 12:40:28,921 - INFO - 📊 Train Loss: 0.1391 | Acc: 90.51%
+2025-05-07 12:40:28,927 - INFO - 📈 Val Acc: 95.03% | Best Val Acc: 95.03%
+2025-05-07 12:40:28,927 - INFO - 
+🏁 Epoch 53/60 started
+2025-05-07 12:45:32,610 - INFO - ✅ Epoch 53 completed in 303.68s
+2025-05-07 12:45:32,611 - INFO - 📊 Train Loss: 0.1378 | Acc: 90.77%
+2025-05-07 12:45:32,611 - INFO - 📈 Val Acc: 94.21% | Best Val Acc: 95.03%
+2025-05-07 12:45:32,612 - INFO - 
+🏁 Epoch 54/60 started
+2025-05-07 12:50:34,079 - INFO - ✅ Epoch 54 completed in 301.47s
+2025-05-07 12:50:34,080 - INFO - 📊 Train Loss: 0.1387 | Acc: 90.52%
+2025-05-07 12:50:34,080 - INFO - 📈 Val Acc: 94.12% | Best Val Acc: 95.03%
+2025-05-07 12:50:34,081 - INFO - 
+🏁 Epoch 55/60 started
+2025-05-07 12:55:35,785 - INFO - ✅ Epoch 55 completed in 301.70s
+2025-05-07 12:55:35,786 - INFO - 📊 Train Loss: 0.1375 | Acc: 90.83%
+2025-05-07 12:55:35,786 - INFO - 📈 Val Acc: 94.08% | Best Val Acc: 95.03%
+2025-05-07 12:55:35,787 - INFO - 
+🏁 Epoch 56/60 started
+2025-05-07 13:00:53,375 - INFO - ✅ Epoch 56 completed in 317.59s
+2025-05-07 13:00:53,375 - INFO - 📊 Train Loss: 0.1379 | Acc: 90.74%
+2025-05-07 13:00:53,376 - INFO - 📈 Val Acc: 94.57% | Best Val Acc: 95.03%
+2025-05-07 13:00:53,376 - INFO - 
+🏁 Epoch 57/60 started
+2025-05-07 13:06:07,487 - INFO - ✅ Epoch 57 completed in 314.11s
+2025-05-07 13:06:07,487 - INFO - 📊 Train Loss: 0.1346 | Acc: 91.03%
+2025-05-07 13:06:07,488 - INFO - 📈 Val Acc: 94.65% | Best Val Acc: 95.03%
+2025-05-07 13:06:07,488 - INFO - 
+🏁 Epoch 58/60 started
+2025-05-07 13:11:20,876 - INFO - ✅ Epoch 58 completed in 313.39s
+2025-05-07 13:11:20,877 - INFO - 📊 Train Loss: 0.1341 | Acc: 91.08%
+2025-05-07 13:11:20,877 - INFO - 📈 Val Acc: 94.59% | Best Val Acc: 95.03%
+2025-05-07 13:11:20,877 - INFO - 
+🏁 Epoch 59/60 started
+2025-05-07 13:16:33,803 - INFO - ✅ Epoch 59 completed in 312.93s
+2025-05-07 13:16:33,804 - INFO - 📊 Train Loss: 0.1336 | Acc: 91.10%
+2025-05-07 13:16:33,804 - INFO - 📈 Val Acc: 94.42% | Best Val Acc: 95.03%
+2025-05-07 13:16:33,805 - INFO - 
+🏁 Epoch 60/60 started
+2025-05-07 13:21:45,144 - INFO - ✅ Epoch 60 completed in 311.34s
+2025-05-07 13:21:45,145 - INFO - 📊 Train Loss: 0.1320 | Acc: 90.86%
+2025-05-07 13:21:45,145 - INFO - 📈 Val Acc: 94.64% | Best Val Acc: 95.03%
+2025-05-07 13:21:48,520 - INFO - 📈 Training curves saved to training_curves.png
+2025-05-07 13:21:48,552 - INFO - 
+🧪 Starting final evaluation...
+2025-05-07 13:22:13,516 - INFO - 📝 Classification report saved to classification_report.txt
+2025-05-07 13:22:17,053 - INFO - 📊 Confusion matrix saved to confusion_matrix.png
+2025-05-07 13:22:17,054 - INFO - 
+🏁 Training completed in 5.34 hours
+2025-05-07 13:22:17,055 - INFO - 📄 Full logs saved to: ./logs/training_logs_20250507_080136.txt

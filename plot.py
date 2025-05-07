@@ -6,7 +6,7 @@ from sklearn.metrics import (confusion_matrix, precision_recall_curve,
                              roc_curve, auc, precision_score, recall_score)
 from torch.utils.data import DataLoader
 import seaborn as sns
-from train_cnn import PlantDiseaseCNN
+from training.train_cnn import PlantDiseaseCNN
 
 # Create directory for graphs if it doesn't exist
 os.makedirs('./graph', exist_ok=True)

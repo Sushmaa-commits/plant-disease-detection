@@ -31,7 +31,7 @@ class PlantDiseaseTrainer:
         self.scheduler = None
         self.logger = self.setup_logging()
         self.batch_size = 32  # Default batch size
-        self.epochs = 30
+        self.epochs = 60
         
     def setup_logging(self):
         log_dir = "./logs"
@@ -169,8 +169,8 @@ class PlantDiseaseTrainer:
 
         class_weights = get_class_weights()
         self.criterion = nn.CrossEntropyLoss(weight=class_weights)
-        self.optimizer = optim.AdamW(self.model.parameters(), lr=0.001, weight_decay=1e-4)
-        self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, 'max', patience=3, factor=0.5)
+        self.optimizer = optim.AdamW(self.model.parameters(), lr=0.0005, weight_decay=1e-4)
+        self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, 'max', patience=2.8, factor=0.5)
         self.scaler = GradScaler()
 
         self.logger.info("\n⚙️ Training Configuration:")
@@ -349,24 +349,24 @@ class PlantDiseaseCNN(nn.Module):
             nn.Conv2d(3, 32, kernel_size=3, padding=1),
             nn.BatchNorm2d(32),
             nn.ReLU(),
-            nn.MaxPool2d(2),       # 224 -> 112
-            nn.Dropout(0.3),
+            nn.MaxPool2d(2),
+            nn.Dropout(0.2),
 
             nn.Conv2d(32, 64, kernel_size=3, padding=1),
             nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.MaxPool2d(2),       # 112 -> 56
-            nn.Dropout(0.4),
+            nn.MaxPool2d(2),
+            nn.Dropout(0.3),
 
             nn.Conv2d(64, 128, kernel_size=3, padding=1),
             nn.BatchNorm2d(128),
             nn.ReLU(),
-            nn.MaxPool2d(2),       # 56 -> 28
-            nn.Dropout(0.5),
+            nn.MaxPool2d(2),
+            nn.Dropout(0.4),
         )
 
         # This is crucial: adaptive pooling makes the output size fixed (no guessing flatten dims)
-        self.pool = nn.AdaptiveAvgPool2d((28, 28))  # Output: 128 x 4 x 4
+        # self.pool = nn.AdaptiveAvgPool2d((28, 28))  # Output: 128 x 4 x 4
 
         self.classifier = nn.Sequential(
             nn.Flatten(),
@@ -379,7 +379,7 @@ class PlantDiseaseCNN(nn.Module):
   
     def forward(self, x):
         x = self.features(x)
-        x = self.pool(x)
+        # x = self.pool(x)
         x = self.classifier(x)
         return x
 

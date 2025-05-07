@@ -5,6 +5,7 @@
 /venv
 
 best_model.pth
+final_model.pth
 
 /training/PlantVillage
 /training/best_model.pth
