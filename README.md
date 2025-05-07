@@ -125,7 +125,7 @@ PlantDiseaseCNN(
 Through multiple iterations, I carefully optimized the model architecture and training process to achieve optimal performance while preventing overfitting. The final training configuration incorporates several key techniques for balanced learning:
 
 **Training Specifications**:
-- Epochs: 30
+- Epochs: 60
 - Batch Size: 32
 - Number of Workers: 3
 - Optimizer: AdamW (lr=0.001)
