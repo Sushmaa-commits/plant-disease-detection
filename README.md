@@ -195,5 +195,5 @@ This project is licensed under the GPL 2.0 License - see the [LICENSE](LICENSE) 
 
 ## 🙏 Acknowledgments
 
-- Dataset from [PlantVillage Dataset](https://www.kaggle.com/emmarex/plantdisease)
-- Inspired by spMohanty's original work
+- Dataset from [PlantVillage Dataset]([https://www.kaggle.com/emmarex/plantdisease](https://www.kaggle.com/api/v1/datasets/download/mohitsingh1804/plantvillage)
+
