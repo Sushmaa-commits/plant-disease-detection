@@ -17,7 +17,7 @@ A deep learning system for detecting plant diseases from leaf images, featuring:
 plant-disease-detection/
 ├── training/                  # Model training scripts
 │   ├── train_cnn.py           # Main training script
-│   ├── final-model.py         # Final trained model (30 epochs)
+│   ├── final-model.py         # Final trained model (60 epochs)
 │   ├── zion_train_cnn.py      # Early prototype training script
 │   └── best_model.pth         # Best performing model weights
 ├── app/                       # Flask application
@@ -27,8 +27,9 @@ plant-disease-detection/
 ├── graphs/                    # Training visualizations
 ├── logs/                      # Training logs
 ├── scripts/                   # Utility scripts
-│   ├── download.py            # Dataset downloader
-│   └── plot.py                # Visualization tools
+│  ├── download.py             # Dataset downloader
+   ├── predict.py             # Pridiction 
+│  └── plot.py                # Visualization tools
 ├── requirements.txt           # Python dependencies
 └── README.md                  # This file
 ```
